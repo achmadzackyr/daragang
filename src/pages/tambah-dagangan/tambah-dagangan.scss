@@ -1,0 +1,23 @@
+page-tambah-dagangan {
+  .block {
+      position: relative;
+      .deleteIcon {
+        position: absolute !important;
+        color: #ffffff !important;
+        margin-left: 80% !important;
+      }
+      .deleteIcon:before {
+        font-size: 30px !important;
+      }
+  }
+
+  #myInput {
+    width: calc(100% - 10px);
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+}
+
+
+
+}

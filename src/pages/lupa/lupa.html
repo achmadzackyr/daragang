@@ -1,0 +1,20 @@
+<ion-header no-border>
+  <ion-navbar transparent>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+  </ion-navbar>
+</ion-header>
+<ion-content class="bg bg2">
+  <div class="login-container">
+    <img class="logo" src="assets/imgs/logo/daragang-logo.png" />
+    <p> </p>
+      <strong>Setel Ulang Password:</strong>
+      <ion-item>
+      	<ion-input type="email" [(ngModel)]="email" name="email" placeholder="Email" ></ion-input>
+      </ion-item>
+      
+      <button ion-button block (click)="reset(email)" class="butt" color="orange">Setel Ulang</button>
+  </div>
+</ion-content>
+

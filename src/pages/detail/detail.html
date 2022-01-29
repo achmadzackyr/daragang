@@ -1,0 +1,300 @@
+<ion-header>
+
+	<ion-navbar #navbar>
+		<ion-title>{{item.dagang.namaDagangan}}</ion-title>
+	</ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+<ion-refresher (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content pullingIcon="arrow-dropdown"
+      pullingText="Tarik untuk Memuat Ulang"
+      refreshingSpinner="circles"
+      refreshingText="Memuat Ulang..."></ion-refresher-content>
+  </ion-refresher>
+	<ion-card class="detail">
+		<img src="{{ item.dagang.fotoDagangan }}" (click)="imageDownload(myImage)" class="gambar" #myImage (load)="loaded = true" [hidden]="!loaded" [ngClass]="{'img-loaded':loaded}">
+		<ion-spinner [ngClass]="{'center':true}" *ngIf="!loaded"></ion-spinner>
+		<ion-card-content class="konten">
+			<div style="box-shadow: 1px 2px 6px #999;">
+				<ion-item text-wrap>
+					<h2 class="sticky" text-wrap>{{item.dagang.namaDagangan}}</h2>
+					<p>Kategori : {{ item.dagang.jenis }} > {{ item.dagang.kategori }}</p>
+				</ion-item>
+
+				<ion-row>
+					<ion-col col-5 no-padding text-wrap><ion-item class="itemHarga">
+						<div class="harga">Rp{{item.dagang.harga}}</div>
+					</ion-item></ion-col>
+					<ion-col col-7 no-padding text-wrap><ion-item class="itemHarga">
+						<div class="ongkir">Ongkir (Rp): {{ format(item.ongkir.min) }}-{{ format(item.ongkir.max) }}</div>
+					</ion-item></ion-col>
+				</ion-row>
+
+				<ion-row no-padding style="margin-top: -10px;">
+					<ion-col col-7 no-padding>
+						<ion-item class="ratesDetail">
+							<rating [(ngModel)]="item.ulasan.rate" readOnly="true" max="5" emptyStarIconName="star-outline" halfStarIconName="star-half" starIconName="star" nullable="false" style="float: left;">
+							</rating>
+							<div item-right class="angkaRatings">{{this.angkaRating}}</div>
+						</ion-item>
+					</ion-col>
+					<ion-col col-5 no-padding *ngIf="!item.disukai.suka">
+						<ion-item class="suka" no-padding >
+							<button ion-button outline icon-left color="primary" (click)="like(item)">
+								<ion-icon name='heart'></ion-icon>
+								Suka {{item.jumlahLike}}
+							</button>
+						</ion-item>
+					</ion-col>
+					<ion-col col-5 no-padding  *ngIf="item.disukai.suka">
+						<ion-item class="suka" no-padding >
+							<button ion-button outline icon-left color="primary-light" (click)="like(item)">
+								<ion-icon name='heart'></ion-icon>
+								Disukai {{item.jumlahLike}}
+							</button>
+						</ion-item>
+					</ion-col>
+				</ion-row>
+				<ion-item text-wrap class="garis">
+					<h3>Rincian Produk</h3>
+					<p *ngIf="item.dagang.stock!='Preorder'&&item.dagang.stock">Stock : {{ item.dagang.stock }}</p>
+					<p *ngIf="item.dagang.stock=='Preorder'&&item.dagang.stock">Stock : {{ item.dagang.stock }} {{ item.dagang.preorder }} Hari</p>
+					<p>Minimal Pemesanan : {{ item.dagang.minimal }}</p>
+					<p style="white-space: pre-line !important;">{{ item.dagang.deskripsiDagangan }}</p>
+				</ion-item>
+				<ion-row no-padding (click)="penjual(item.keyUser)">
+					<ion-col col-9 no-padding>
+						<ion-item text-wrap class="garis" no-padding style="padding-left: 16px;">
+							<ion-avatar item-start>
+								<img src="{{item.dagang.foto}}">
+							</ion-avatar>
+							<h3 class="sticky" text-wrap>{{item.dagang.nama}}</h3>
+							<p>Bergabung sejak {{item.dagang.joinDate}}</p>
+						</ion-item>
+					</ion-col>
+					<ion-col col-3 no-padding style="background-color: white;">
+						<ion-item no-padding class="lihatProfil">
+							<button ion-button outline icon-left color="primary">
+								Profil
+							</button>
+						</ion-item>
+					</ion-col>
+				</ion-row>
+			</div>
+
+			<div class="bio">
+				<p class="header-wilayah" *ngIf="cod.length!=0">Ongkos Kirim Per Kecamatan (Rp0 = gratis)</p>
+				<ion-item text-wrap *ngFor="let item of cod" class="tabel">
+					<ion-row>
+						<ion-col col-8 class="header-tabel-wilayah">{{ item.wilayah }}, {{ item.kabupaten }}</ion-col>
+						<ion-col col-4 class="isi-tabel">Rp{{ format(item.ongkir) }}</ion-col>
+					</ion-row>
+				</ion-item>
+			</div>
+
+		    <div class="bio">
+		      <p class="header-wilayah">Lokasi di Peta</p>
+		      <ion-item text-wrap class="tabelMap">
+		        <!-- <div id="map" style="width:100%; height:25vh;"></div> -->
+		        <div id="detailmap"></div>
+		      </ion-item>
+		    </div>
+
+			<div class="bio">
+				<ion-item class="tabel" text-wrap>
+					<ion-row>
+						<ion-col col-4 class="header-tabel"><ion-icon color="primary" item-start name='pin'></ion-icon>Lokasi</ion-col>
+						<ion-col col-8 class="isi-tabel">{{ item.dagang.alamat}} Kec.{{ item.dagang.kecamatan}}, {{ item.dagang.kabupaten}}</ion-col>
+					</ion-row>
+				</ion-item>
+				<ion-item class="tabel" text-wrap>
+					<ion-row>
+						<ion-col col-4 class="header-tabel"><ion-icon color="primary" item-start name='bicycle'></ion-icon>Wilayah Pengiriman</ion-col>
+						<ion-col col-8 class="isi-tabel">{{ item.dagang.ciamis }} {{ item.dagang.banjar }} {{ item.dagang.pangandaran }} {{ item.dagang.kotatasikmalaya }} {{ item.dagang.kabtasikmalaya }} {{ item.dagang.garut }} {{ item.dagang.sumedang }}</ion-col>
+					</ion-row>
+				</ion-item>
+				<ion-item class="tabel" text-wrap>
+					<ion-row>
+						<ion-col col-4 class="header-tabel"><ion-icon color="primary" item-start name='timer'></ion-icon>Jam Buka</ion-col>
+						<ion-col col-8 class="isi-tabel">{{ item.dagang.jamBuka }} s/d {{ item.dagang.jamTutup }} WIB</ion-col>
+					</ion-row>
+				</ion-item>
+				<ion-item class="tabel" text-wrap>
+					<ion-row>
+						<ion-col col-4 class="header-tabel"><ion-icon color="primary" item-start name='bulb'></ion-icon>Hari Buka</ion-col>
+						<ion-col col-8 class="isi-tabel">{{ item.dagang.hariBuka }}</ion-col>
+					</ion-row>
+				</ion-item>
+				<ion-item class="tabel" text-wrap>
+					<ion-row>
+						<ion-col col-4 class="header-tabel"><ion-icon color="primary" item-start name='logo-whatsapp'></ion-icon>No.HP</ion-col>
+						<ion-col col-8 class="isi-tabel" (click)="copyHp(item.dagang.hp)" style="color: #C70039">{{ item.dagang.hp }} (<ion-icon color="primary" name='copy'></ion-icon> Salin)</ion-col>
+					</ion-row>
+				</ion-item>
+			</div>
+
+		</ion-card-content>
+		<!-- Segment in content -->
+		<ion-segment [(ngModel)]="komentardanulasan" color="primary">
+			<ion-segment-button value="komentar">
+				Komentar
+			</ion-segment-button>
+			<ion-segment-button value="ulasan">
+				Ulasan
+			</ion-segment-button>
+		</ion-segment>
+
+		<div [ngSwitch]="komentardanulasan" >
+			
+			<ion-list *ngSwitchCase="'komentar'">
+				<ion-row>
+					<ion-col>
+						<ion-item class="item-komentar">
+							<textarea #myInput id="myInput" rows="1" maxLength="500" (keyup)="resize()" [(ngModel)]="this.komentar.isiKomentar" placeholder="Isi Komentar..."></textarea>
+							<button ion-button clear class="sendButton" color="secondary" type="button" item-right (click)="kirimKomentar()">
+								<ion-icon name="send"> </ion-icon>
+							</button>
+						</ion-item>
+					</ion-col>
+				</ion-row>
+				<ion-item class="listKomentar" #komentarPos text-wrap *ngFor="let itemKomentar of komentar$; let i = index;">
+					<ion-item>
+						<ion-avatar item-start (click)="penjual(itemKomentar.keyKomentator)">
+							<img src="{{itemKomentar.komentator.foto}}">
+						</ion-avatar>
+						
+						<div class="komentator" *ngIf="!yangIni[i]"><strong (click)="penjual(itemKomentar.keyKomentator)">{{itemKomentar.komentator.nama}}</strong> {{itemKomentar.komentar.isiKomentar}}</div>
+						<div class="komentator" *ngIf="yangIni[i]"><strong (click)="penjual(itemKomentar.keyKomentator)">{{itemKomentar.komentator.nama}}</strong>
+							<ion-item class="item-komentar">
+							<textarea #myInput id="myInput" rows="1" maxLength="500" (keyup)="resize()" [(ngModel)]="this.isiUbahKomentar[i]" placeholder="Ubah Komentar..."></textarea>
+							<button ion-button clear class="sendButton" color="secondary" type="button" item-right (click)="prosesUbahKomentar(this.isiUbahKomentar[i],itemKomentar.keyKomentar,i)">
+								<ion-icon name="send"> </ion-icon>
+							</button>
+							</ion-item>
+						</div>
+
+						<div class="tanggalKomentar">{{itemKomentar.komentar.createDate}}</div>
+						<button ion-button icon-only item-end clear (click)="cekPemilikKomentar(itemKomentar,i)">
+							<ion-icon name="more"></ion-icon>
+						</button>
+			</ion-item>
+
+			<ion-item class="listKomentarBalasan" text-wrap *ngFor="let itemBalasan of itemKomentar.balasan; let j = index;">
+				<ion-avatar item-start (click)="penjual(itemBalasan.isiBalasan.keyKomentator)">
+					<img src="{{itemBalasan.komentatorBalasan.foto}}">
+				</ion-avatar>
+				<div class="komentator" (click)="penjual(itemBalasan.isiBalasan.keyKomentator)"><strong>{{itemBalasan.komentatorBalasan.nama}}</strong></div>
+
+				<div class="komentator" *ngIf="!yangIniBalasan[j]&&!yangIniBalasanParent[i]">{{itemBalasan.isiBalasan.isiKomentar}}</div>
+				<div class="komentator" *ngIf="yangIniBalasan[j]&&yangIniBalasanParent[i]">
+					<ion-item>
+						<textarea #myInput id="myInputBalasan" style="width: 35vw" rows="1" maxLength="500" (keyup)="resize()" [(ngModel)]="this.isiUbahBalasan[j]" placeholder="Ubah Komentar..."></textarea>
+						<button ion-button clear class="sendButton" color="secondary" type="button" item-right (click)="prosesUbahBalasan(this.isiUbahBalasan[j],itemKomentar.keyKomentar,itemBalasan.keyBalasan,i,j)">
+							<ion-icon name="send"> </ion-icon>
+						</button>
+					</ion-item>
+				</div>
+
+				<div class="tanggalKomentar">{{itemBalasan.isiBalasan.createDate}}</div>
+				<button ion-button icon-only item-end clear (click)="cekPemilikBalasan(itemBalasan,itemKomentar,i,j)">
+					<ion-icon name="more"></ion-icon>
+				</button>
+
+			</ion-item>
+			<ion-item>
+				<textarea #myInput id="myInputBalasan" rows="1" maxLength="500" (keyup)="resize()" [(ngModel)]="this.isiBalasan" placeholder="Balas Komentar..." *ngIf="itemKomentar.komentar.balas"></textarea>
+				<button ion-button clear class="sendButton" color="secondary" type="button" item-right (click)="kirimBalasan(itemKomentar.keyKomentar)" *ngIf="itemKomentar.komentar.balas">
+					<ion-icon name="send"> </ion-icon>
+				</button>
+			</ion-item>
+		</ion-item>
+
+	</ion-list>
+	<ion-list *ngSwitchCase="'ulasan'">
+		<ion-row>
+			<ion-col>
+				<ion-item class="item-komentar">
+					<textarea #myInput id="myInput" rows="1" maxLength="500" (keyup)="resize()" [(ngModel)]="this.ulasan.isiUlasan" placeholder="Isi Ulasan..."></textarea>
+					<button ion-button clear color="secondary" type="button" item-right (click)="uploadFotoUlasan()" class="uploadFoto">
+						<ion-icon name="camera"> </ion-icon>
+					</button>
+					<button ion-button clear class="sendButton" color="secondary" type="button" item-right (click)="kirimUlasan()">
+						<ion-icon name="send"> </ion-icon>
+					</button>
+				</ion-item>
+				<ion-item class="rateInput">
+					<rating [(ngModel)]="this.ulasan.rating" readOnly="false" max="5" emptyStarIconName="star-outline" halfStarIconName="star-half" starIconName="star" nullable="false">
+					</rating>
+				</ion-item>
+				<img src="{{currentImage}}"/>
+			</ion-col>
+		</ion-row>
+		<ion-item class="listKomentar" #komentarPos text-wrap *ngFor="let itemUlasan of ulasan$;let i=index;">
+			<ion-item>
+				<ion-avatar item-start (click)="penjual(itemUlasan.keyPengulas)">
+					<img src="{{itemUlasan.pengulas.foto}}">
+				</ion-avatar>
+
+				<div class="komentator" *ngIf="!this.yangIniUlasan[i]"><strong (click)="penjual(itemUlasan.keyPengulas)">{{itemUlasan.pengulas.nama}}</strong> {{itemUlasan.ulasan.isiUlasan}}</div>
+
+				<div *ngIf="this.yangIniUlasan[i]">
+					<ion-item class="item-komentar">
+						<div class="komentator"><strong>{{itemUlasan.pengulas.nama}}</strong></div>
+						<textarea #myInput id="myInput" rows="1" maxLength="500" (keyup)="resize()" [(ngModel)]="this.isiUbahUlasan[i]" placeholder="Ubah Ulasan..."></textarea>
+						<button ion-button clear color="secondary" type="button" item-right (click)="uploadFotoUbahUlasan(i)" class="uploadFoto">
+							<ion-icon name="camera"> </ion-icon>
+						</button>
+						<button ion-button clear class="sendButton" color="secondary" type="button" item-right (click)="prosesUbahUlasan(this.isiUbahUlasan[i],itemUlasan,i)">
+							<ion-icon name="send"> </ion-icon>
+						</button>
+					</ion-item>
+					<ion-item class="rates">
+						<rating [(ngModel)]="this.isiRatingUlasan[i]" readOnly="false" max="5" emptyStarIconName="star-outline" halfStarIconName="star-half" starIconName="star" nullable="false">
+						</rating>
+					</ion-item>
+					<ion-item>
+						<img src="{{currentUbahImage[i]}}"/>
+					</ion-item>
+				</div>
+
+				<div class="tanggalKomentar">{{itemUlasan.ulasan.createDate}}</div>
+				<div class="rates" *ngIf="!this.yangIniUlasan[i]"><rating [(ngModel)]="itemUlasan.ulasan.rating" readOnly="true" max="5" emptyStarIconName="star-outline" halfStarIconName="star-half" starIconName="star" nullable="false">
+				</rating></div>
+				<button ion-button icon-only item-end clear (click)="cekPemilikUlasan(itemUlasan,i)">
+					<ion-icon name="more"></ion-icon>
+				</button>
+			</ion-item>
+			<ion-item class="gambarUlasan" *ngIf="!this.yangIniUlasan[i]">
+				<img src="{{ itemUlasan.ulasan.foto }}" (click)="imageDownload(myImage)" class="gambar" #myImage (load)="loaded = true" [hidden]="!loaded" [ngClass]="{'img-loaded':loaded}">
+				<ion-spinner [ngClass]="{'center':true}" *ngIf="!loaded"></ion-spinner>
+			</ion-item>
+
+			<ion-item class="listKomentarBalasan" text-wrap *ngFor="let itemBalasan of itemUlasan.balasan">
+				<ion-avatar item-start (click)="penjual(itemBalasan.isiBalasan.keyPengulas)">
+					<img src="{{itemBalasan.pengulasBalasan.foto}}">
+				</ion-avatar>
+				<div class="komentator" (click)="penjual(itemBalasan.isiBalasan.keyPengulas)"><strong>{{itemBalasan.pengulasBalasan.nama}}</strong></div>
+				<div class="komentator">{{itemBalasan.isiBalasan.isiUlasan}}</div>
+				<div class="tanggalKomentar">{{itemBalasan.isiBalasan.createDate}}</div>
+				<button ion-button icon-only item-end clear (click)="cekPemilikUlasanBalasan(itemUlasan,itemBalasan,i)">
+					<ion-icon name="more"></ion-icon>
+				</button>
+
+			</ion-item>
+			<ion-item>
+				<textarea #myInput id="myInputBalasan" rows="1" maxLength="500" (keyup)="resize()" [(ngModel)]="this.isiBalasanUlasan" placeholder="Balas Ulasan..." *ngIf="itemUlasan.ulasan.balas"></textarea>
+				<button ion-button clear class="sendButton" color="secondary" type="button" item-right (click)="kirimBalasanUlasan(itemUlasan.keyUlasan)" *ngIf="itemUlasan.ulasan.balas">
+					<ion-icon name="send"> </ion-icon>
+				</button>
+			</ion-item>
+		</ion-item>
+	</ion-list>
+</div>
+</ion-card>
+</ion-content>
+<ion-footer text-center class="action">
+	<button ion-button no-margin icon-left *ngIf="!pemilik" color="secondary" (click)="whatsappShare(item)"><ion-icon name='logo-whatsapp'></ion-icon>Chat WA</button><button ion-button no-margin icon-left *ngIf="!pemilik" color="primary" (click)="smsShare(item)"><ion-icon name='mail'></ion-icon>SMS</button><button ion-button no-margin icon-left *ngIf="pemilik" color="secondary" (click)="editDagangan(item)"><ion-icon name='create'></ion-icon>Ubah</button><button ion-button no-margin icon-left *ngIf="pemilik" color="primary" (click)="showPrompt(item)"><ion-icon name='trash'></ion-icon>Hapus</button>
+</ion-footer>

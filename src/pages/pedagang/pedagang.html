@@ -1,0 +1,63 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon><ion-badge color="secondary" *ngIf="jumlah.like!=0||jumlah.komentar!=0||jumlah.ulasan!=0">{{jumlah.like+jumlah.komentar+jumlah.ulasan}}</ion-badge>
+    </button>
+    <ion-searchbar (keyup.enter)="getItems($event)" placeholder="Cari Pedagang"></ion-searchbar>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content>
+  <ion-refresher (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content pullingIcon="arrow-dropdown"
+      pullingText="Tarik untuk Memuat Ulang"
+      refreshingSpinner="circles"
+      refreshingText="Memuat Ulang..."></ion-refresher-content>
+  </ion-refresher>
+  <ion-fab right bottom>
+    <button ion-fab color="secondary" style="box-shadow: 1px 3px 6px #555;" (click)="presentPopover($event)">
+      <ion-icon name="funnel"></ion-icon>
+    </button>
+  </ion-fab>
+  <ion-list>
+    <ion-card *ngFor="let item of pedagang$; let i = index">
+        <ion-item (click)="penjual(item.keyUser)" class="headerPenjual">
+          <ion-avatar item-start>
+            <img src="{{item.dataUser.foto}}">
+          </ion-avatar>
+          <h2 class="sticky" text-wrap>{{item.dataUser.nama}}</h2>
+          <ion-item class="ratesPenjual">
+            <rating [(ngModel)]="item.ulasan.rate" readOnly="true" max="5" emptyStarIconName="star-outline" halfStarIconName="star-half" starIconName="star" nullable="false">
+            </rating>
+            <div item-right class="angkaRating">{{item.ulasan.rate}}({{item.ulasan.jumlah}})</div>
+          </ion-item>
+        </ion-item>
+        <img src="{{ item.dataUser.cover }}" (click)="penjual(item.keyUser)" class="gambar" (load)="loaded = true" [hidden]="!loaded" [ngClass]="{'img-loaded':loaded}">
+        <ion-spinner [ngClass]="{'center':true}" *ngIf="!loaded"></ion-spinner>
+        <ion-item>
+            <button ion-button full color="secondary"  *ngIf="!item.following" (click)="jadiPengikut(item)">Berlanggan <ion-icon name="help"></ion-icon></button>
+            <button ion-button full color="primary" *ngIf="item.following" (click)="batalIkut(item)">Langganan <ion-icon name="checkmark"></ion-icon></button>
+          </ion-item>
+        <ion-card-content class="konten" (click)="penjual(item.keyUser)">
+          <ion-item no-padding text-wrap>
+            <ion-icon color="primary" large item-start name='pricetag'></ion-icon>
+            <p>{{ item.dataUser.deskripsi }}</p>
+          </ion-item>
+          <ion-item no-padding text-wrap>
+            <ion-icon color="primary" large item-start name='pin'></ion-icon>
+            <h3>Lokasi : {{ item.dataUser.kecamatan }}, {{ item.dataUser.kabupaten }}</h3>
+            <p>Wilayah Pengiriman: {{ item.dataUser.ciamis }} {{ item.dataUser.banjar }} {{ item.dataUser.pangandaran }} {{ item.dataUser.kotatasikmalaya }} {{ item.dataUser.kabtasikmalaya }} {{ item.dataUser.garut }} {{ item.dataUser.sumedang }}</p>
+          </ion-item>
+          <ion-item no-padding text-wrap>
+            <ion-icon color="primary" large item-start name='timer'></ion-icon>
+            <h3>Buka {{ item.dataUser.jamBuka }} s/d {{ item.dataUser.jamTutup }} WIB</h3>
+            <p>{{ item.dataUser.hariBuka }}</p>
+          </ion-item>
+        </ion-card-content>
+      </ion-card>
+      <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
+         <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Mengambil data selanjutnya.."></ion-infinite-scroll-content>
+       </ion-infinite-scroll>
+</ion-list>
+</ion-content>

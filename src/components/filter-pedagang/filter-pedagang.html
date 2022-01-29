@@ -1,0 +1,240 @@
+<!-- Generated template for the FilterPedagangComponent component -->
+<div class="box">
+<ion-list>
+<h6>Wilayah Pengiriman / COD</h6>
+  <ion-item>
+    <ion-label>Kabupaten</ion-label>
+    <ion-select [(ngModel)]="kabupaten" (ionChange)="onChangeCOD(kabupaten)" interface="popover">
+      <ion-option value="Ciamis">Ciamis</ion-option>
+      <ion-option value="Banjar">Banjar</ion-option>
+      <ion-option value="Pangandaran">Pangandaran</ion-option>
+      <ion-option value="Kab.Tasikmalaya">Kab.Tasikmalaya</ion-option>
+      <ion-option value="Kota Tasikmalaya">Kota Tasikmalaya</ion-option>
+      <ion-option value="Garut">Garut</ion-option>
+      <ion-option value="Sumedang">Sumedang</ion-option>
+    </ion-select>
+  </ion-item>
+  <ion-item *ngIf="ciamis">
+    <ion-label>Kab.Ciamis</ion-label>
+    <ion-select [(ngModel)]="user.ciamis" interface="popover">
+          <ion-option value="Banjarsari">Banjarsari</ion-option>
+          <ion-option value="Baregbeg">Baregbeg</ion-option>
+          <ion-option value="Ciamis">Ciamis Kota</ion-option>
+          <ion-option value="Cidolog">Cidolog</ion-option>
+          <ion-option value="Cihaurbeuti">Cihaurbeuti</ion-option>
+          <ion-option value="Cijeungjing">Cijeungjing</ion-option>
+          <ion-option value="Cikoneng">Cikoneng</ion-option>
+          <ion-option value="Cimaragas">Cimaragas</ion-option>
+          <ion-option value="Cipaku">Cipaku</ion-option>
+          <ion-option value="Cisaga">Cisaga</ion-option>
+          <ion-option value="Jatinagara">Jatinagara</ion-option>
+          <ion-option value="Kawali">Kawali</ion-option>
+          <ion-option value="Lakbok">Lakbok</ion-option>
+          <ion-option value="Lumbung">Lumbung</ion-option>
+          <ion-option value="Pamarican">Pamarican</ion-option>
+          <ion-option value="Panawangan">Panawangan</ion-option>
+          <ion-option value="Panjalu">Panjalu</ion-option>
+          <ion-option value="Panumbangan">Panumbangan</ion-option>
+          <ion-option value="Purwadadi">Purwadadi</ion-option>
+          <ion-option value="Rajadesa">Rajadesa</ion-option>
+          <ion-option value="Rancah">Rancah</ion-option>
+          <ion-option value="Sadananya">Sadananya</ion-option>
+          <ion-option value="Sindangkasih">Sindangkasih</ion-option>
+          <ion-option value="Sukadana">Sukadana</ion-option>
+          <ion-option value="Sukamantri">Sukamantri</ion-option>
+          <ion-option value="Tambaksari">Tambaksari</ion-option>
+          <ion-option value="Panjalu Utara">Panjalu Utara</ion-option>
+    </ion-select>
+  </ion-item>
+
+  <ion-item *ngIf="banjar">
+    <ion-label>Kota Banjar</ion-label>
+    <ion-select [(ngModel)]="user.banjar" interface="popover">
+      <ion-option value="Banjar">Banjar</ion-option>
+      <ion-option value="Langensari">Langensari</ion-option>
+      <ion-option value="Pataruman">Pataruman</ion-option>
+      <ion-option value="Purwaharja">Purwaharja</ion-option>
+    </ion-select>
+  </ion-item>
+
+  <ion-item *ngIf="pangandaran">
+    <ion-label>Kecamatan</ion-label>
+    <ion-select [(ngModel)]="user.pangandaran" interface="popover">
+      <ion-option value='Cigugur'>Cigugur</ion-option>
+      <ion-option value='Cijulang'>Cijulang</ion-option>
+      <ion-option value='Cimerak'>Cimerak</ion-option>
+      <ion-option value='Kalipucang'>Kalipucang</ion-option>
+      <ion-option value='Langkaplancar'>Langkaplancar</ion-option>
+      <ion-option value='Mangunjaya'>Mangunjaya</ion-option>
+      <ion-option value='Padaherang'>Padaherang</ion-option>
+      <ion-option value='Pangandaran'>Pangandaran</ion-option>
+      <ion-option value='Parigi'>Parigi</ion-option>
+      <ion-option value='Sidamulih'>Sidamulih</ion-option>
+    </ion-select>
+  </ion-item>
+
+  <ion-item *ngIf="kotatasikmalaya">
+    <ion-label>Kecamatan</ion-label>
+    <ion-select [(ngModel)]="user.kotatasikmalaya" interface="popover">
+      <ion-option value='Bungursari'>Bungursari</ion-option>
+      <ion-option value='Cibeureum'>Cibeureum</ion-option>
+      <ion-option value='Cihideung'>Cihideung</ion-option>
+      <ion-option value='Cipedes'>Cipedes</ion-option>
+      <ion-option value='Indihiang'>Indihiang</ion-option>
+      <ion-option value='Kawalu'>Kawalu</ion-option>
+      <ion-option value='Mangkubumi'>Mangkubumi</ion-option>
+      <ion-option value='Purbaratu'>Purbaratu</ion-option>
+      <ion-option value='Tamansari'>Tamansari</ion-option>
+      <ion-option value='Tawang'>Tawang</ion-option>
+    </ion-select>
+  </ion-item>
+
+  <ion-item *ngIf="kabtasikmalaya">
+    <ion-label>Kecamatan</ion-label>
+    <ion-select [(ngModel)]="user.kabtasikmalaya" interface="popover">
+      <ion-option value='Bantarkalong'>Bantarkalong</ion-option>
+      <ion-option value='Bojongasih'>Bojongasih</ion-option>
+      <ion-option value='Bojonggambir'>Bojonggambir</ion-option>
+      <ion-option value='Ciawi'>Ciawi</ion-option>
+      <ion-option value='Cibalong'>Cibalong</ion-option>
+      <ion-option value='Cigalontang'>Cigalontang</ion-option>
+      <ion-option value='Cikalong'>Cikalong</ion-option>
+      <ion-option value='Cikatomas'>Cikatomas</ion-option>
+      <ion-option value='Cineam'>Cineam</ion-option>
+      <ion-option value='Cipatujah'>Cipatujah</ion-option>
+      <ion-option value='Cisayong'>Cisayong</ion-option>
+      <ion-option value='Culamega'>Culamega</ion-option>
+      <ion-option value='Gunungtanjung'>Gunungtanjung</ion-option>
+      <ion-option value='Jamanis'>Jamanis</ion-option>
+      <ion-option value='Jatiwaras'>Jatiwaras</ion-option>
+      <ion-option value='Kadipaten'>Kadipaten</ion-option>
+      <ion-option value='Karangjaya'>Karangjaya</ion-option>
+      <ion-option value='Karangnunggal'>Karangnunggal</ion-option>
+      <ion-option value='Leuwisari'>Leuwisari</ion-option>
+      <ion-option value='Mangunreja'>Mangunreja</ion-option>
+      <ion-option value='Manonjaya'>Manonjaya</ion-option>
+      <ion-option value='Padakembang'>Padakembang</ion-option>
+      <ion-option value='Pagerageung'>Pagerageung</ion-option>
+      <ion-option value='Pancatengah'>Pancatengah</ion-option>
+      <ion-option value='Parungponteng'>Parungponteng</ion-option>
+      <ion-option value='Puspahiang'>Puspahiang</ion-option>
+      <ion-option value='Rajapolah'>Rajapolah</ion-option>
+      <ion-option value='Salawu'>Salawu</ion-option>
+      <ion-option value='Salopa'>Salopa</ion-option>
+      <ion-option value='Sariwangi'>Sariwangi</ion-option>
+      <ion-option value='Singaparna'>Singaparna</ion-option>
+      <ion-option value='Sodonghilir'>Sodonghilir</ion-option>
+      <ion-option value='Sukahening'>Sukahening</ion-option>
+      <ion-option value='Sukaraja'>Sukaraja</ion-option>
+      <ion-option value='Sukarame'>Sukarame</ion-option>
+      <ion-option value='Sukaratu'>Sukaratu</ion-option>
+      <ion-option value='Sukaresik'>Sukaresik</ion-option>
+      <ion-option value='Tanjungjaya'>Tanjungjaya</ion-option>
+      <ion-option value='Taraju'>Taraju</ion-option>
+    </ion-select>
+  </ion-item>
+
+  <ion-item *ngIf="garut">
+    <ion-label>Kecamatan</ion-label>
+    <ion-select [(ngModel)]="user.garut" interface="popover">
+      <ion-option value='Banjarwangi'>Banjarwangi</ion-option>
+      <ion-option value='Banyuresmi'>Banyuresmi</ion-option>
+      <ion-option value='Bayongbong'>Bayongbong</ion-option>
+      <ion-option value='Balubur Limbangan'>Balubur Limbangan</ion-option>
+      <ion-option value='Bungbulang'>Bungbulang</ion-option>
+      <ion-option value='Caringin'>Caringin</ion-option>
+      <ion-option value='Cibalong'>Cibalong</ion-option>
+      <ion-option value='Cibatu'>Cibatu</ion-option>
+      <ion-option value='Cibiuk'>Cibiuk</ion-option>
+      <ion-option value='Cigedug'>Cigedug</ion-option>
+      <ion-option value='Cihurip'>Cihurip</ion-option>
+      <ion-option value='Cikajang'>Cikajang</ion-option>
+      <ion-option value='Cikelet'>Cikelet</ion-option>
+      <ion-option value='Cilawu'>Cilawu</ion-option>
+      <ion-option value='Cisewu'>Cisewu</ion-option>
+      <ion-option value='Cisompet'>Cisompet</ion-option>
+      <ion-option value='Cisurupan'>Cisurupan</ion-option>
+      <ion-option value='Garut Kota'>Garut Kota</ion-option>
+      <ion-option value='Kadungora'>Kadungora</ion-option>
+      <ion-option value='Karangpawitan'>Karangpawitan</ion-option>
+      <ion-option value='Karangtengah'>Karangtengah</ion-option>
+      <ion-option value='Kersamanah'>Kersamanah</ion-option>
+      <ion-option value='Leles'>Leles</ion-option>
+      <ion-option value='Leuwigoong'>Leuwigoong</ion-option>
+      <ion-option value='Malangbong'>Malangbong</ion-option>
+      <ion-option value='Mekarmukti'>Mekarmukti</ion-option>
+      <ion-option value='Pakenjeng'>Pakenjeng</ion-option>
+      <ion-option value='Pameungpeuk'>Pameungpeuk</ion-option>
+      <ion-option value='Pamulihan'>Pamulihan</ion-option>
+      <ion-option value='Pangatikan'>Pangatikan</ion-option>
+      <ion-option value='Pasirwangi'>Pasirwangi</ion-option>
+      <ion-option value='Peundeuy'>Peundeuy</ion-option>
+      <ion-option value='Samarang'>Samarang</ion-option>
+      <ion-option value='Selaawi'>Selaawi</ion-option>
+      <ion-option value='Singajaya'>Singajaya</ion-option>
+      <ion-option value='Sucinaraja'>Sucinaraja</ion-option>
+      <ion-option value='Sukaresmi'>Sukaresmi</ion-option>
+      <ion-option value='Sukawening'>Sukawening</ion-option>
+      <ion-option value='Talegong'>Talegong</ion-option>
+      <ion-option value='Tarogong Kaler'>Tarogong Kaler</ion-option>
+      <ion-option value='Tarogong Kidul'>Tarogong Kidul</ion-option>
+      <ion-option value='Wanaraja'>Wanaraja</ion-option>
+    </ion-select>
+  </ion-item>
+
+  <ion-item *ngIf="sumedang">
+    <ion-label>Kecamatan</ion-label>
+    <ion-select [(ngModel)]="user.sumedang" interface="popover">
+      <ion-option value='Buahdua'>Buahdua</ion-option>
+      <ion-option value='Cibugel'>Cibugel</ion-option>
+      <ion-option value='Cimalaka'>Cimalaka</ion-option>
+      <ion-option value='Cimanggung'>Cimanggung</ion-option>
+      <ion-option value='Cisarua'>Cisarua</ion-option>
+      <ion-option value='Cisitu'>Cisitu</ion-option>
+      <ion-option value='Conggeang'>Conggeang</ion-option>
+      <ion-option value='Darmaraja'>Darmaraja</ion-option>
+      <ion-option value='Ganeas'>Ganeas</ion-option>
+      <ion-option value='Jatigede'>Jatigede</ion-option>
+      <ion-option value='Jatinangor'>Jatinangor</ion-option>
+      <ion-option value='Jatinunggal'>Jatinunggal</ion-option>
+      <ion-option value='Pamulihan'>Pamulihan</ion-option>
+      <ion-option value='Paseh'>Paseh</ion-option>
+      <ion-option value='Rancakalong'>Rancakalong</ion-option>
+      <ion-option value='Situraja'>Situraja</ion-option>
+      <ion-option value='Sukasari'>Sukasari</ion-option>
+      <ion-option value='Sumedang Selatan'>Sumedang Selatan</ion-option>
+      <ion-option value='Sumedang Utara'>Sumedang Utara</ion-option>
+      <ion-option value='Surian'>Surian</ion-option>
+      <ion-option value='Tanjungkerta'>Tanjungkerta</ion-option>
+      <ion-option value='Tanjungmedar'>Tanjungmedar</ion-option>
+      <ion-option value='Tanjungsari'>Tanjungsari</ion-option>
+      <ion-option value='Tomo'>Tomo</ion-option>
+      <ion-option value='Ujung Jaya'>Ujung Jaya</ion-option>
+      <ion-option value='Wado'>Wado</ion-option>
+    </ion-select>
+  </ion-item>
+  <h6>Lokasi Pedagang</h6>
+  <ion-item>
+	<ion-label>Kabupaten</ion-label>
+	  <ion-select [(ngModel)]="user.kabupaten" (ionChange)="onChange(user.kabupaten)" interface="popover">
+	    <ion-option value="Ciamis">Ciamis</ion-option>
+	    <ion-option value="Banjar">Banjar</ion-option>
+      <ion-option value="Pangandaran">Pangandaran</ion-option>
+      <ion-option value="Kab.Tasikmalaya">Kab.Tasikmalaya</ion-option>
+      <ion-option value="Kota Tasikmalaya">Kota Tasikmalaya</ion-option>
+      <ion-option value="Garut">Garut</ion-option>
+      <ion-option value="Sumedang">Sumedang</ion-option>
+	  </ion-select>
+	</ion-item>
+	<ion-item>
+	<ion-label>Kecamatan</ion-label>
+	  <ion-select #item [(ngModel)]="user.kecamatan" interface="popover">
+	  	<ion-option *ngFor="let item of items" value="{{item.value}}">{{item.text}} </ion-option>
+	  </ion-select>
+	</ion-item>
+	<ion-item>
+		<button ion-button small (click)="itemClick(user,kabupaten)">Saring</button>
+		<button ion-button small outline (click)="reset()">Reset</button>
+	</ion-item>
+</ion-list>
+</div>

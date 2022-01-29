@@ -1,0 +1,212 @@
+page-jasa {
+
+	.konten {
+	padding: 0px 16px 5px 16px;
+	}
+
+	h6 {
+	text-align: center !important;
+	background-color: map-get($colors, primary);
+	color: #fff;
+	padding: 5px;
+	}
+
+	.card-content p {
+    font-size: 0.7em !important;
+  }
+
+  .gambar {
+  	height: 52vw;
+  	object-fit: cover;
+  }
+
+  ion-card {
+    img {
+          height: 52vw;
+    object-fit: cover;
+    }
+  }
+
+  .garis {
+
+	border-top: 1px solid #ccc;
+
+  }
+
+    hr {
+    border: 0;
+    height: 1px;
+    background: #444;
+    background: -webkit-linear-gradient(left, hsla(0, 0%, 0%, 0) 0%, rgb(188, 198, 214) 50%, hsla(0, 0%, 0%, 0) 100%);
+  }
+
+  .thumb {
+  	ion-col {
+  		background-size: cover;
+	    color: white;
+	    font-size:small;
+	    background-repeat: no-repeat;
+	    background-position: center;
+	    height:18vw;
+	    margin:2px;
+	    background-color: #777;
+		  background-blend-mode: multiply;
+      text-shadow: 1px 1px 1px #444;
+
+		div {
+			margin-top: 10px;
+		}
+  	}
+
+  }
+
+  .semuajasa {
+    background-image: url('../assets/imgs/menu/semuajasa.jpg');
+  }
+  .bangunan {
+    background-image: url('../assets/imgs/menu/bangunan.jpg');
+  }
+  .bengkel {
+    background-image: url('../assets/imgs/menu/bengkel.jpg');
+  }
+
+  .desain {
+    background-image: url('../assets/imgs/menu/design.jpg');
+  }
+  .jahit {
+    background-image: url('../assets/imgs/menu/jahit.jpg');
+  }
+  .komputer {
+    background-image: url('../assets/imgs/menu/komputer.jpg');
+  }
+
+  .kursus {
+    background-image: url('../assets/imgs/menu/kursus.jpg');
+  }
+  .art {
+    background-image: url('../assets/imgs/menu/art.jpg');
+  }
+  .baby {
+    background-image: url('../assets/imgs/menu/babysitter.jpg');
+  }
+
+  .pernikahan {
+    background-image: url('../assets/imgs/menu/pernikahan.jpg');
+  }
+  .rental {
+    background-image: url('../assets/imgs/menu/rental.jpg');
+  }
+  .service {
+    background-image: url('../assets/imgs/menu/service.jpg');
+  }
+
+  .travel {
+    background-image: url('../assets/imgs/menu/travel.jpg');
+  }
+  .barber {
+    background-image: url('../assets/imgs/menu/barber.jpg');
+  }
+  .jasalainnya {
+    background-image: url('../assets/imgs/menu/jasalainnya.jpg');
+  }
+
+
+
+   .img-loaded + ion-spinner {
+  display:none;
+}
+
+.center{
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+}
+
+ul {
+  padding: 0px;
+
+  &.rating li {
+    padding: 0px !important;
+    background: none;
+    color: map-get($colors, secondary);
+
+    ion-icon {
+      font-size: 18px;
+    }
+  }
+}
+
+.suka {
+    max-height: 3rem !important;
+    margin-top: -15px;
+    float:right;
+      ion-label {
+        margin-top: 3px;
+        margin-right: 0px;
+      }
+
+      button {
+        float: right;
+        margin-right: 8px;
+      }
+}
+
+.rates {
+    max-height: 3rem !important;
+    margin-top: -15px;
+    overflow: hidden;
+      ion-label {
+        margin-top: 3px;
+      }
+      .input-wrapper {
+        max-width: 60%;
+      }
+
+      .item-inner {
+        padding-right: 0px !important;
+      }
+}
+
+.namaDagangan {
+  margin: 0 0 2px;
+font-size: 1.6rem;
+font-weight: normal;
+}
+
+.angkaRating {
+  font-size: 12px;
+margin-top: 0px !important;
+color: grey;
+}
+
+.angkaRatings {
+  font-size: 12px;
+  margin-top: 0px !important;
+  color: grey;
+  margin-left: -3px !important;
+  //display: inline;
+  overflow: hidden;
+}
+
+.harga {
+    margin: 0 0 2px;
+    font-size: 1.6rem;
+    font-weight: bold;
+    color: black;
+  }
+
+  .ongkir {
+    margin: 0 0 2px;
+    font-size: 1.2rem;
+    font-weight: normal;
+    color: grey;
+    text-align: right;
+  }
+
+  .itemHarga {
+    margin-bottom: 6px;
+    margin-top: -15px;
+  }
+
+
+}

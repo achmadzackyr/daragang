@@ -1,0 +1,31 @@
+<ion-header no-border>
+  <ion-navbar transparent>
+  	 <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+  </ion-navbar>
+</ion-header>
+<ion-content class="bg">
+  <!-- <ion-slides pager="false" autoplay="2000" loop="true" speed="1500" effect="fade">
+    <ion-slide class="slide-background swiper-no-swiping" *ngFor="let background of backgrounds" [ngStyle]="{'background-image': 'url(' + background +')'}">
+    </ion-slide>
+  </ion-slides> -->
+  <div class="login-container">
+    <!-- <img class="logo" src="assets/imgs/logo/daragang-logo.png" /> -->
+    <img class="logo" src="assets/imgs/logo/logo-daragang.png" />
+    <p> </p>
+      <strong>Login:</strong>
+      <ion-item>
+        <ion-input type="email" [(ngModel)]="user.email" name="email" placeholder="Email" ></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-input type="password" [(ngModel)]="user.password" name="password" placeholder="Password" (keyup.enter)="login(user)"></ion-input>
+      </ion-item>
+      <p> </p>
+      <button ion-button block class="butt" (click)="login(user)">LOGIN</button>
+      <button ion-button block class="butt" (click)="masukDenganFacebook(user)"><ion-icon name="logo-facebook"></ion-icon>&nbsp;Masuk dengan Facebook</button>
+      <button ion-button block color="secondary" (click)="daftar()" class="butt">DAFTAR BARU</button>
+      <p (click)="reset()"><strong>Lupa password?</strong></p>
+  </div>
+</ion-content>
+

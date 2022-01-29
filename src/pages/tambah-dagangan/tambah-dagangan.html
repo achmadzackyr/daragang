@@ -1,0 +1,116 @@
+<ion-header>
+  <ion-navbar #navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon><ion-badge color="secondary" *ngIf="jumlah.like!=0||jumlah.komentar!=0||jumlah.ulasan!=0">{{jumlah.like+jumlah.komentar+jumlah.ulasan}}</ion-badge>
+    </button>
+    <ion-title *ngIf="!edit">Tambah Dagangan</ion-title>
+    <ion-title *ngIf="edit">Ubah Dagangan</ion-title>
+    <ion-buttons end>
+        <button ion-button icon-only (click)="tambahDagangan(dagangan)" *ngIf="!edit">
+            <ion-icon name="checkmark"></ion-icon>
+        </button>
+        <button ion-button icon-only (click)="editDagangan(dagangan)" *ngIf="edit">
+            <ion-icon name="checkmark"></ion-icon>
+        </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content padding>
+		<ion-item>
+			<img src="{{currentImage}}"/>
+			<button ion-button full color="secondary" (click)="changePic()" >
+			  <ion-icon name="camera"></ion-icon>&nbsp; Pilih Gambar
+			</button>
+		</ion-item>
+
+		<ion-item style="background-color: #ffeeee" *ngIf="!kat&&edit">
+			<ion-row>
+				<ion-col col-4><h3>Jenis</h3></ion-col>
+				<ion-col col-8><h3>{{dagangan.jenis}}</h3></ion-col>
+			</ion-row>
+			<ion-row>
+				<ion-col col-4><h3>Kategori</h3></ion-col>
+				<ion-col col-8><h3>{{dagangan.kategori}}</h3></ion-col>
+			</ion-row>
+			<button ion-button full color="secondary" (click)="ubahKategori(dagangan.jenis)" >
+			  <ion-icon name="create"></ion-icon>&nbsp; Ubah Kategori
+			</button>
+		</ion-item>
+		<ion-item style="background-color: #ffeeee" *ngIf="kat&&edit">
+			<ion-row>
+				<ion-col col-8>Jenis</ion-col>
+				<ion-col col-4 (click)="ubahJenis()">{{dagangan.jenis}}</ion-col>
+			</ion-row>
+		</ion-item>
+		<ion-item  style="background-color: #ffeeee" *ngIf="kat&&edit">
+			<ion-label>Kategori</ion-label>
+			<ion-select #item [(ngModel)]="dagangan.kategori" interface="popover">
+				<ion-option *ngFor="let item of items" value="{{item.value}}">{{item.text}} </ion-option>
+			</ion-select>
+		</ion-item>
+		<ion-item style="background-color: #ffeeee" *ngIf="kat&&edit">
+			<button ion-button full color="secondary" (click)="simpanKategori()" >
+			  <ion-icon name="checkmark"></ion-icon>&nbsp; Simpan Kategori
+			</button>
+		</ion-item>
+
+
+		<ion-item style="background-color: #ffeeee" *ngIf="!edit">
+			<ion-label>Jenis</ion-label>
+			<ion-select [(ngModel)]="dagangan.jenis" interface="popover" (ionChange)="onChange(jenis)">
+			    <ion-option value="Makanan">Makanan</ion-option>
+			    <ion-option value="Barang">Barang</ion-option>
+			    <ion-option value="Jasa">Jasa</ion-option>
+			</ion-select>
+		</ion-item>
+		<ion-item  style="background-color: #ffeeee" *ngIf="!edit">
+			<ion-label>Kategori</ion-label>
+			<ion-select #item [(ngModel)]="dagangan.kategori" okText="Pilih" cancelText="Batal">
+				<ion-option *ngFor="let item of items" value="{{item.value}}">{{item.text}} </ion-option>
+			</ion-select>
+		</ion-item>
+
+
+		<ion-item>
+	    	<ion-label floating>Nama Dagangan</ion-label>
+	    	<ion-input type="text" [(ngModel)]="dagangan.namaDagangan"></ion-input>
+	  	</ion-item>
+	  	<ion-item>
+    		<ion-label floating>Deskripsi</ion-label>
+    		<ion-textarea #myInput id="myInput" (keyup)="resize()" [(ngModel)]="dagangan.deskripsiDagangan"></ion-textarea>
+  	  	</ion-item>
+  	  	<ion-item>
+	      <ion-label>Stock</ion-label>
+	      <ion-select [(ngModel)]="dagangan.stock" interface="popover" (ionChange)="onChangeStock(dagangan.stock)">
+	        <ion-option value="Tersedia">Tersedia</ion-option>
+	        <ion-option value="Preorder">Preorder</ion-option>
+	      </ion-select>
+	    </ion-item>
+	    <ion-item *ngIf="preorder">
+	    	<ion-row item-content>
+	    		<ion-col col-8><ion-input type="tel" [(ngModel)]="dagangan.preorder"></ion-input></ion-col>
+	    		<ion-col col-4 style="padding: 17px 0px;text-align: end;"><p>Hari</p></ion-col>
+	    	</ion-row>
+		</ion-item>
+		<ion-item>
+	    	<ion-label floating>Min.Pemesanan</ion-label>
+	    	<ion-row item-content>
+	    		<!-- <ion-input type="tel" [(ngModel)]="dagangan.minimal"></ion-input> -->
+		    	<ion-col col-6><ion-input type="tel" [(ngModel)]="nominal" pattern="^[$\-\s]*[\d\,]*?([\.]\d{0,10})?\s*$" (input)="nominal = format(nominal)"></ion-input></ion-col>
+		    	<ion-col col-6 style="text-align: end;">
+		    		<ion-select [(ngModel)]="satuan" interface="popover" (ionChange)="onChangeStock(dagangan.stock)">
+				        <ion-option value="Pcs / Pasang / Order">Pcs / Pasang / Order</ion-option>
+				        <ion-option value="Kg">Kg</ion-option>
+				        <ion-option value="Total Belanja">Total Belanja</ion-option>
+		      		</ion-select>
+		 		 </ion-col>
+	  		</ion-row>
+	  	</ion-item>
+	  	<ion-item>
+	    	<ion-label floating>Harga</ion-label>
+	    	<ion-input [(ngModel)]="budget" type="tel" pattern="^[$\-\s]*[\d\,]*?([\.]\d{0,10})?\s*$" #myBudget="ngModel" (input)="budget = format(budget)"></ion-input>
+	  	</ion-item>
+	  	<br /><br /><br />
+</ion-content>

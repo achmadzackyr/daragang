@@ -1,0 +1,62 @@
+page-login {
+  .scroll-content {
+    margin-top: 0 !important;
+  }
+  .logo {
+    width: 70%;
+    height: auto;
+    padding-top: 7vh;
+    margin-bottom: 5vh;
+  }
+  span {
+    //color: white;
+  }
+
+  ion-item {
+    color: #555 !important;
+    padding-left: 0px !important;
+    padding-right: 0px !important;
+    margin-bottom: 10px;
+    //background-color: transparent !important;
+    font-size: 0.9em;
+  }
+
+  ::-webkit-input-placeholder {
+    color: #555 !important;
+  }
+
+  ::-moz-placeholder {
+      color: #555 !important;
+  }
+
+  .login-container {
+    color: #555;
+    position: absolute;
+    top: 0;
+    padding: 10vw;
+    text-align: center;
+    width: 100%;
+    margin: 0 auto;
+    z-index: 2;
+  }
+  ion-button {
+    opacity: 0.8;
+  }
+
+  .butt {
+    //opacity: 0.8;
+    margin-top: 8px;
+  }
+
+  .bg {
+    //background-image: url("../assets/imgs/slides/wishlist-1.jpg");
+    background-color: white;
+    //map-get($colors, primary-dark);
+    // background-size: cover;
+    // background-position: center;
+    // background-repeat: no-repeat;
+    //border-color: transparent;
+    //background-color: #cccccc;
+    //background-blend-mode: multiply;
+  }
+}

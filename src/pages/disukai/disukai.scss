@@ -1,0 +1,165 @@
+page-disukai {
+
+	.konten {
+	padding: 5px 16px;
+	}
+
+	.card-content p {
+    font-size: 0.7em !important;
+  }
+
+  .gambar {
+  	height: 160px;
+  	object-fit: cover;
+  }
+
+  .garis {
+
+	border-top: 1px solid #ccc;
+
+  }
+
+    hr {
+    border: 0;
+    height: 1px;
+    background: #444;
+    background: -webkit-linear-gradient(left, hsla(0, 0%, 0%, 0) 0%, rgb(188, 198, 214) 50%, hsla(0, 0%, 0%, 0) 100%);
+  }
+
+  h6 {
+  text-align: center !important;
+  background-color: map-get($colors, primary);
+  color: #fff;
+  padding: 5px;
+  }
+
+.img-loaded + ion-spinner {
+  display:none;
+}
+
+.center{
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+}
+
+ul {
+  padding: 0px;
+
+  &.rating li {
+    padding: 0px !important;
+    background: none;
+    color: map-get($colors, secondary);
+
+    ion-icon {
+      font-size: 18px;
+    }
+  }
+}
+
+.suka {
+    max-height: 3rem !important;
+    margin-top: -15px;
+    float:right;
+      ion-label {
+        margin-top: 3px;
+        margin-right: 0px;
+      }
+
+      button {
+        float: right;
+        margin-right: 8px;
+      }
+}
+
+.rates {
+    max-height: 3rem !important;
+    margin-top: -15px;
+      ion-label {
+        margin-top: 3px;
+      }
+      .input-wrapper {
+        max-width: 62%;
+      }
+
+      .item-inner {
+        padding-right: 0px !important;
+      }
+}
+
+.namaDagangan {
+  margin: 0 0 2px;
+font-size: 1.6rem;
+font-weight: normal;
+}
+
+.angkaRating {
+  font-size: 12px;
+margin-top: -5px !important;
+color: grey;
+margin-left: -30px !important;
+}
+
+.angkaRatings {
+  font-size: 12px;
+margin-top: 0px !important;
+color: grey;
+margin-left: -3px !important;
+}
+
+.harga {
+    padding: 0px;
+    margin: 0 0 2px;
+    font-size: 1.6rem;
+    font-weight: bold;
+    color: black;
+  }
+
+  .ongkir {
+    margin: 0 0 2px;
+    font-size: 1.2rem;
+    font-weight: normal;
+    color: grey;
+    text-align: right;
+  }
+
+  .itemHarga {
+  margin-bottom: 6px;
+  margin-top: -15px;
+
+    .item-inner {
+      padding-right: 0px !important;
+    }
+  }
+
+.ratesPenjual {
+    max-height: 3rem !important;
+    margin-top: -2px;
+    padding: 0px;
+
+      ion-label {
+        margin-top: -15px;
+      }
+      .input-wrapper {
+        max-width: 62%;
+      }
+
+      .item-inner {
+        padding-right: 0px !important;
+      }
+
+  }
+
+  .headerPenjual {
+    .input-wrapper {
+      margin-bottom: -15px;
+    }
+  }
+
+  ion-card {
+    ion-icon {
+      transform: rotate(0deg) !important;
+    }
+  }
+
+}

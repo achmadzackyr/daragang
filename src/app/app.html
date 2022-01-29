@@ -1,0 +1,58 @@
+<ion-menu [content]="content" id="menu-off">
+    <ion-content>
+      <div class="menu-header">
+        <!--material-design-background-->
+        <img class="user-avatar round" [src]="chosenPicture || placeholder" onerror="this.src='assets/imgs/background/avatar-default.png'"
+        />
+        <p class="name">&nbsp;</p>
+        <p class="e-mail">Anda Belum Login</p>
+      </div>
+      <ion-list>
+      <button menuClose="left" ion-item detail-none *ngFor="let p of loggedOutPages" (click)="openPage(p)">
+        <ion-icon [name]="p.icon" color="primary" [isActive]="isActive(p)" item-left></ion-icon>
+        {{p.title}}
+      </button>
+      <button menuClose="left" ion-item detail-none *ngFor="let p of pages" (click)="openPage(p)">
+        <ion-icon [name]="p.icon" color="primary" [isActive]="isActive(p)" item-left></ion-icon>
+        {{p.title}}
+      </button>
+      </ion-list>
+    </ion-content>
+  </ion-menu>
+
+
+<!--Material Design Menu-->
+  <ion-menu [content]="content" id="menu-material">
+    <ion-content>
+      <div class="menu-header" [ngStyle]="{'background-image': 'url(' + (profileData | async)?.cover +')'}">
+        <!--material-design-background-->
+        <img class="user-avatar round" src="{{(profileData | async)?.foto}}" onerror="this.src='assets/imgs/background/avatar-default.png'"
+        />
+        <p class="name">{{(profileData | async)?.nama}}</p>
+        <p class="e-mail">{{(profileData | async)?.email}}</p>
+      </div>
+
+      <ion-list>
+        <ion-list-header>
+          Akun
+        </ion-list-header>
+        <button ion-item menuClose="left" detail-none *ngFor="let p of loggedInPages" (click)="openPage(p)">
+          <ion-icon item-left [name]="p.icon" color="primary" [isActive]="isActive(p)"></ion-icon>
+          {{p.title}} <span item-right *ngIf="p.title=='Notifikasi'"><ion-badge color="secondary" *ngIf="jumlah.like!=0||jumlah.komentar!=0||jumlah.ulasan!=0">{{jumlah.like+jumlah.komentar+jumlah.ulasan}}</ion-badge></span>
+        </button>
+      </ion-list>
+
+      <ion-list>
+        <ion-list-header>
+          Dagangan
+        </ion-list-header>
+      <button menuClose="left" ion-item detail-none *ngFor="let p of pages" (click)="openPage(p)">
+        <ion-icon [name]="p.icon" color="primary" [isActive]="isActive(p)" item-left></ion-icon>
+        {{p.title}}
+      </button>
+     
+      </ion-list>
+    </ion-content>
+  </ion-menu>
+  <!-- Disable swipe-to-go-back because it's poor UX to combine STGB with side menus -->
+  <ion-nav [root]="rootPage" #content swipeBackEnabled="false"></ion-nav>

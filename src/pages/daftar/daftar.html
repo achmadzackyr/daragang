@@ -1,0 +1,25 @@
+<ion-header no-border>
+  <ion-navbar transparent>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+  </ion-navbar>
+</ion-header>
+<ion-content class="bg bg2">
+  <div class="login-container">
+    <img class="logo" src="assets/imgs/logo/daragang-logo.png" />
+    <p> </p>
+      <strong>Daftar:</strong>
+      <ion-item>
+        <ion-input type="text" [(ngModel)]="user.nama" name="nama" placeholder="Nama"></ion-input>
+      </ion-item>
+      <ion-item>
+      	<ion-input type="email" [(ngModel)]="user.email" name="email" placeholder="Email" ></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-input type="password" [(ngModel)]="user.password" name="password" placeholder="Password"></ion-input>
+      </ion-item>
+      <button ion-button block (click)="daftar(user)" class="butt" color="orange">DAFTAR</button>
+  </div>
+</ion-content>
+

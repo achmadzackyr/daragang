@@ -1,0 +1,34 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon><ion-badge color="secondary" *ngIf="jumlah.like!=0||jumlah.komentar!=0||jumlah.ulasan!=0">{{jumlah.like+jumlah.komentar+jumlah.ulasan}}</ion-badge>
+    </button>
+    <ion-title>Daragang</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <ion-refresher (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content pullingIcon="arrow-dropdown"
+      pullingText="Tarik untuk Memuat Ulang"
+      refreshingSpinner="circles"
+      refreshingText="Memuat Ulang..."></ion-refresher-content>
+  </ion-refresher>
+  <ion-slides autoplay="3000" loop="true" effect="coverflow">
+    <ion-slide *ngFor="let slide of slides" [ngStyle]="{'background' : 'url(' + slide.imageUrl + ')'}">
+      <h2>{{slide.title}}</h2>
+    </ion-slide>
+  </ion-slides>
+  <div class="menuUtama">
+    <ion-row>
+      <ion-col col-6 (click)="makanan()"><ion-icon name="pizza"></ion-icon><br />Makanan</ion-col>
+      <ion-col col-6 (click)="barang()"><ion-icon name="cube"></ion-icon><br />Barang</ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col col-6 (click)="jasa()"><ion-icon name="build"></ion-icon><br />Jasa</ion-col>
+      <ion-col col-6 (click)="pedagang()"><ion-icon name="contacts"></ion-icon><br />Pedagang</ion-col>
+    </ion-row>
+
+  </div>
+</ion-content>
+

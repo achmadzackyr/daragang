@@ -1,0 +1,351 @@
+page-detail {
+
+  .tabelMap {
+    width: 100%;
+    padding-left: 0px;
+    border-bottom: 1px solid #ccc;
+
+    .item-inner {
+      padding-right: 0px !important;
+
+      ion-label {
+        margin: 0px !important;
+      }
+    }
+  }
+  
+	
+.konten {
+  padding: 0px 0px 10px 0px;
+  background-color: #e7e7e7;
+  }
+
+	h6 {
+	text-align: center !important;
+	background-color: #00796b;
+	color: #fff;
+	padding: 5px;
+	}
+
+	.card-content p {
+    font-size: 0.7em !important;
+  }
+
+  .gambar {
+  	object-fit: cover;
+  }
+
+  .garis {
+
+	border-top: 1px solid #ccc;
+
+  }
+
+  .detail {
+  	margin:0px;
+  	width:100%;
+  }
+
+  .item-komentar {
+  	padding-left:5px;
+  }
+
+  .sendButton{
+  	height: 3rem !important;
+	font-size: 3rem !important;
+	padding: 0px !important;
+	margin:0px !important;
+  	}
+
+  .uploadFoto {
+    font-size: 2.5rem !important;
+    padding: 0px !important;
+  }
+
+ .tabel {
+  width: 100%;
+  padding-left: 0px;
+  border-bottom: 1px solid #ccc;
+  ion-label {
+    margin:0px;
+  }
+  }
+
+  .header-tabel {
+  padding-left: 16px;
+  font-size: 1rem;
+  color: grey;
+
+  ion-icon {
+    margin-left: 0px !important;
+    margin-top: 0px !important;
+    margin-bottom: 0px !important;
+  }
+  }
+
+  .isi-tabel {
+    margin-top:0px;
+    font-size: 1rem;
+    text-align: right;
+    font-weight: bold;
+    color: grey;
+    padding-right: 8px;
+  }
+
+  .bio {
+    border-top: 1px solid #ccc;
+    margin-top: 10px;
+    box-shadow: 1px 2px 6px #999;
+  }
+
+
+
+  .action {
+  	button {
+  		width: 50vw;
+  		padding: 0px;
+  		margin: 0px;
+  		border-radius:0px;
+  	}
+  }
+
+ #myInput {
+    width: 100%;
+    border: 1px solid #ccc;
+    border-radius: 0;
+    background: transparent;
+    font-size: 1.2rem;
+    padding: 5px;
+    min-height: 43.6px;
+}
+
+#myInputBalasan {
+    width: 75vw;
+    border: 1px solid #ccc;
+    border-radius: 0;
+    background: transparent;
+    font-size: 1.2rem;
+    padding: 5px;
+    min-height: 43.6px;
+    margin-left: 0px;
+}
+
+.listKomentar {
+	width: 100vw;
+	font-size: 1.2rem;
+	border: 1px solid #ccc;
+  padding-left: 0px;
+  }
+
+
+.listKomentarBalasan {
+  font-size: 1.2rem;
+  padding-left: 48px;
+  }
+
+  .tanggalKomentar {
+  	font-size: 0.9rem;
+	color: grey;
+  }
+
+  .komentator {
+  	font-size: 1.2rem;
+  	width:100%;
+  	strong {
+  		color: map-get($colors, primary)
+  	}
+  }
+
+.img-loaded + ion-spinner {
+  display:none;
+}
+
+.center{
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+}
+
+ul {
+  padding: 0px;
+
+  &.rating li {
+    padding: 0px !important;
+    background: none;
+    color: map-get($colors, secondary);
+
+    ion-icon {
+      font-size: 18px;
+    }
+  }
+}
+
+.suka {
+    max-height: 3rem !important;
+    margin-top: -15px;
+    float:right;
+      ion-label {
+        margin-top: 3px;
+        margin-right: 0px;
+      }
+
+      button {
+        float: right;
+        margin-right: 8px;
+      }
+}
+
+.lihatProfil {
+    border-top: 1px solid #ccc;
+    float:right;
+    height: 100%;
+      // ion-label {
+      //   margin: 0px;
+      // }
+
+      button {
+        float: right;
+        margin-right: 8px;
+      }
+}
+
+.ratesDetail {
+    max-height: 3rem !important;
+    margin-top: -15px;
+    overflow: hidden;
+      ion-label {
+        margin-top: 3px;
+      }
+      .input-wrapper {
+        max-width: 60%;
+      }
+
+      .item-inner {
+        padding-right: 0px !important;
+      }
+}
+  .namaDagangan {
+    margin: 0 0 2px;
+    font-size: 1.6rem;
+    font-weight: normal;
+  }
+
+  .angkaRating {
+    font-size: 12px;
+    margin-top: 0px !important;
+    color: grey;
+  }
+
+  .angkaRatings {
+    font-size: 12px;
+    color: grey;
+    overflow:hidden;
+    margin: 0px 0px 9px -3px !important;
+  }
+
+  .harga {
+    padding: 0px;
+    margin: 0 0 2px;
+    font-size: 1.6rem;
+    font-weight: bold;
+    color: black;
+  }
+
+  .ongkir {
+    margin: 0 0 2px;
+    font-size: 1.2rem;
+    font-weight: normal;
+    color: grey;
+    text-align: right;
+  }
+
+  .itemHarga {
+  margin-bottom: 6px;
+  margin-top: -15px;
+  }
+
+
+.rate {
+    max-height: 3rem !important;
+      ion-label {
+        margin-top: 0px;
+      }
+}
+
+.gambarUlasan {
+  ion-label {
+      margin: 5px 64px 0px 56px;
+    box-shadow: 1px 2px 6px #777;
+    border-radius: 2px;
+    }
+  }
+
+  .rates {
+    max-height: 3rem !important;
+    margin-top: -5px;
+    margin-bottom: -18px;
+      ion-label {
+        margin-top: 3px;
+      }
+      .input-wrapper {
+        max-width: 60%;
+      }
+
+      ul {
+        padding: 0px;
+
+        &.rating li {
+          padding: 0px !important;
+          background: none;
+          color: map-get($colors, secondary);
+
+          ion-icon {
+            font-size: 20px;
+          }
+        }
+      }
+  }
+
+  .rateInput {
+    max-height: 3rem !important;
+    margin-top: -5px;
+    margin-bottom: 10px;
+      ion-label {
+        margin-top: 3px;
+      }
+      
+
+      ul {
+        //padding: 0px;
+
+        &.rating li {
+          padding: 5px 10px !important;
+          background: none;
+          color: map-get($colors, secondary);
+
+          ion-icon {
+            font-size: 20px;
+          }
+        }
+      }
+}
+
+.header-wilayah {
+    font-size: 1rem;
+    font-weight: bold;
+    color: grey;
+    text-align: left;
+    margin-left: 16px;
+  }
+
+.header-tabel-wilayah {
+  font-size: 1rem;
+  color: grey;
+  padding-left: 16px;
+  text-transform: capitalize;
+}
+
+
+
+
+}

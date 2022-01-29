@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "417171407834",
+    "firebase_url": "https://daragang-e38b1.firebaseio.com",
+    "project_id": "daragang-e38b1",
+    "storage_bucket": "daragang-e38b1.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:417171407834:android:76a6120489cd39f7",
+        "android_client_info": {
+          "package_name": "com.daragang.app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "417171407834-000idkbk1bv02114sl4necs6p8712lec.apps.googleusercontent.com",
+          "client_type": 3
+        },
+        {
+          "client_id": "417171407834-000idkbk1bv02114sl4necs6p8712lec.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyClaJK-2i9AwIxWkNRIzAV6j6TC6_MqwW8"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

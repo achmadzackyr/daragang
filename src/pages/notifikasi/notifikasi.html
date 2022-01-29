@@ -1,0 +1,74 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle (click)="hitungNotif()">
+      <ion-icon name="menu"></ion-icon><ion-badge color="secondary" *ngIf="jumlah.like!=0||jumlah.komentar!=0||jumlah.ulasan!=0">{{jumlah.like+jumlah.komentar+jumlah.ulasan}}</ion-badge>
+    </button>
+    <ion-title>Notifikasi</ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only (click)="actionNotif($event)">
+        <ion-icon name="more"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+<ion-refresher (ionRefresh)="doRefresh($event)">
+  <ion-refresher-content pullingIcon="arrow-dropdown"
+    pullingText="Tarik untuk Memuat Ulang"
+    refreshingSpinner="circles"
+    refreshingText="Memuat Ulang..."></ion-refresher-content>
+</ion-refresher>
+<ion-segment [(ngModel)]="notifikasi" color="primary" style="margin-bottom: 5px;">
+  <ion-segment-button value="suka">
+    Suka <ion-badge color="secondary" *ngIf="jumlah.like!=0">{{jumlah.like}}</ion-badge>
+  </ion-segment-button>
+  <ion-segment-button value="komentar">
+    Komentar <ion-badge color="secondary" *ngIf="jumlah.komentar!=0">{{jumlah.komentar}}</ion-badge>
+  </ion-segment-button>
+  <ion-segment-button value="ulasan">
+    Ulasan <ion-badge color="secondary" *ngIf="jumlah.ulasan!=0">{{jumlah.ulasan}}</ion-badge>
+  </ion-segment-button>
+</ion-segment>
+
+<div [ngSwitch]="notifikasi">
+<ion-list *ngSwitchCase="'suka'">
+  <ion-item *ngFor="let item of notifikasi$">
+      <ion-avatar item-start>
+        <img src="{{item.fotoPelaku}}" (click)="klikPelaku(item.notif.keyPelaku)">
+      </ion-avatar>
+      <p style="font-size: 1.2rem" text-wrap (click)="klikNotifLike(item)"><strong>{{item.namaPelaku}}</strong> menyukai {{item.notif.namaDagangan}}.</p>
+      <p style="font-size: 1rem;color: grey" (click)="klikNotifLike(item)"><ion-icon name="time"></ion-icon> {{item.notif.createDate}} <ion-badge color="secondary" *ngIf="item.notif.aktif && !dibaca" (click)="klikNotifLike(item)">Baru</ion-badge></p>
+      <ion-avatar item-end>
+        <img src="{{item.notif.fotoDagangan}}" style="border-radius: 0%" (click)="klikNotifikasi(item.notif)">
+      </ion-avatar>
+    </ion-item>
+</ion-list>
+
+<ion-list *ngSwitchCase="'komentar'">
+  <ion-item *ngFor="let item of notifikasiKomentar$">
+    <ion-avatar item-start>
+      <img src="{{item.fotoPelaku}}" (click)="klikPelaku(item.notif.keyPelaku)">
+    </ion-avatar>
+    <p style="font-size: 1.2rem" text-wrap (click)="klikNotifKomentar(item)"><strong>{{item.namaPelaku}}</strong> mengomentari {{item.notif.namaDagangan}}.</p>
+    <p style="font-size: 1rem;color: grey" (click)="klikNotifKomentar(item)"><ion-icon name="time"></ion-icon> {{item.notif.createDate}} <ion-badge color="secondary" *ngIf="item.notif.aktif && !dibaca" (click)="klikNotifKomentar(item)">Baru</ion-badge></p>
+    <ion-avatar item-end>
+      <img src="{{item.notif.fotoDagangan}}" style="border-radius: 0%" (click)="klikNotifikasi(item.notif)">
+    </ion-avatar>
+  </ion-item>
+</ion-list>
+
+<ion-list *ngSwitchCase="'ulasan'">
+  <ion-item *ngFor="let item of notifikasiUlasan$">
+    <ion-avatar item-start>
+      <img src="{{item.fotoPelaku}}" (click)="klikPelaku(item.notif.keyPelaku)">
+    </ion-avatar>
+    <p style="font-size: 1.2rem" text-wrap (click)="klikNotifUlasan(item)"><strong>{{item.namaPelaku}}</strong> mengulas {{item.notif.namaDagangan}}.</p>
+    <p style="font-size: 1rem;color: grey" (click)="klikNotifUlasan(item)"><ion-icon name="time"></ion-icon> {{item.notif.createDate}} <ion-badge color="secondary" *ngIf="item.notif.aktif && !dibaca" (click)="klikNotifUlasan(item)">Baru</ion-badge></p>
+    <ion-avatar item-end>
+      <img src="{{item.notif.fotoDagangan}}" style="border-radius: 0%" (click)="klikNotifikasi(item.notif)">
+    </ion-avatar>
+  </ion-item>
+</ion-list>
+</div>
+</ion-content>

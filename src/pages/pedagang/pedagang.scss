@@ -1,0 +1,74 @@
+page-pedagang {
+
+ .headerPenjual {
+    .input-wrapper {
+      margin-bottom: -15px;
+    }
+  }
+
+  .ratesPenjual {
+    max-height: 3rem !important;
+    margin-top: -2px;
+    padding: 0px;
+
+      ion-label {
+        margin-top: -15px;
+      }
+      .input-wrapper {
+        max-width: 60%;
+      }
+
+      .item-inner {
+        padding-right: 0px !important;
+      }
+
+  }
+
+  .angkaRating {
+  	font-size: 12px;
+	margin-top: -5px !important;
+	color: grey;
+	margin-left: -30px !important;
+	}
+
+ .gambar {
+  	height: 160px;
+  	object-fit: cover;
+  }
+
+  .konten {
+	padding: 5px 16px;
+	}
+
+.img-loaded + ion-spinner {
+  display:none;
+}
+
+.center{
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+}
+
+ul {
+  padding: 0px;
+
+  &.rating li {
+    padding: 0px !important;
+    background: none;
+    color: #ff5733;
+
+    ion-icon {
+      font-size: 18px;
+    }
+  }
+}
+
+.card-content p {
+    font-size: 0.7em !important;
+  }
+
+
+
+
+}

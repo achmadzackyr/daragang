@@ -1,0 +1,250 @@
+<ion-content padding class="transparent-header">
+  <ion-refresher (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content pullingIcon="arrow-dropdown"
+      pullingText="Tarik untuk Memuat Ulang"
+      refreshingSpinner="circles"
+      refreshingText="Memuat Ulang..."></ion-refresher-content>
+  </ion-refresher>
+  <ion-fab right bottom *ngIf="!this.keyUser&&currentUser">
+    <button ion-fab color="secondary" style="box-shadow: 1px 3px 6px #555;" (click)="tambahDagangan()">
+      <ion-icon name="add"></ion-icon>
+    </button>
+  </ion-fab>
+  <ion-header>
+    <ion-navbar>
+    	<button ion-button menuToggle class="navButton">
+      <ion-icon name="menu"></ion-icon><ion-badge color="secondary" *ngIf="jumlah.like!=0||jumlah.komentar!=0||jumlah.ulasan!=0">{{jumlah.like+jumlah.komentar+jumlah.ulasan}}</ion-badge>
+    </button>
+    </ion-navbar>
+  </ion-header>  
+  <div id="profile-bg" [ngStyle]="{'background-image': 'url(' + (profileData | async)?.cover +')'}"></div>
+  <div id="content">
+    <div id="profile-info">
+      <img id="profile-image" src="{{(profileData | async)?.foto}}">
+      
+        <h3 id="profile-name">{{(profileData | async)?.nama}}</h3>
+      
+      <button ion-button small *ngIf="tombolUbah" (click)="edit()">Ubah</button><button ion-button small *ngIf="tombolUbah&&!verified" (click)="verifikasi()">Verifikasi</button>
+      <button ion-button small color="secondary" *ngIf="this.keyUser&&!following&&currentUser&&!tombolUbah" (click)="jadiPengikut()">Berlanggan <ion-icon name="help"></ion-icon></button>
+      <button ion-button small color="secondary" *ngIf="this.keyUser&&following&&currentUser" (click)="batalIkut()">Langganan <ion-icon name="checkmark"></ion-icon></button>
+      <hr />
+       <ion-row class="profile-numbers">
+      <ion-col col-4>
+        <p>Dagangan</p>
+        <span>{{ jumlahDagangan }}</span>
+      </ion-col>
+      <ion-col col-4 (click)="lihatPelanggan()">
+        <p>Pelanggan</p>
+        <span>{{jumlahPengikut}}</span>
+      </ion-col>
+      <ion-col col-4>
+        <p>Ulasan</p>
+        <span><ion-icon color="secondary" item-start name='star'></ion-icon>{{ rating }} ({{jumlahUlasan}})</span>
+      </ion-col>
+    </ion-row>
+      <div class="bio">
+      <ion-item text-wrap>
+        <p class="header-deskripsi">Deskripsi Toko</p>
+        <p class="isi-deskripsi">{{(profileData | async)?.deskripsi}}</p>
+      </ion-item>
+    </div>
+
+    <div class="bio">
+      <p class="header-wilayah" *ngIf="cod.length!=0">Ongkos Kirim Per Kecamatan (Rp0 = gratis)</p>
+      <ion-item text-wrap *ngFor="let item of cod" class="tabel">
+         <ion-row>
+          <ion-col col-8 class="header-tabel-wilayah">{{ item.wilayah }}, {{ item.kabupaten }}</ion-col>
+          <ion-col col-4 class="isi-tabel">Rp{{ format(item.ongkir) }}</ion-col>
+        </ion-row>
+      </ion-item>
+    </div>
+
+    <div class="bio">
+      <p class="header-wilayah">Lokasi di Peta</p>
+      <ion-item text-wrap class="tabelMap">
+        <!-- <div id="map" style="width:100%; height:25vh;"></div> -->
+        <div id="profilmap"></div>
+      </ion-item>
+    </div>
+
+    <div class="bio">
+      <ion-item class="tabel" text-wrap>
+        <ion-row>
+          <ion-col col-4 class="header-tabel"><ion-icon color="primary" item-start name='calendar'></ion-icon>Bergabung</ion-col>
+          <ion-col col-8 class="isi-tabel">{{(profileData | async)?.joinDate}}</ion-col>
+        </ion-row>
+      </ion-item>
+       <ion-item class="tabel" text-wrap>
+        <ion-row>
+          <ion-col col-4 class="header-tabel"><ion-icon color="primary" item-start name='pin'></ion-icon>Lokasi</ion-col>
+          <ion-col col-8 class="isi-tabel">{{(profileData | async)?.alamat}} Kec.{{(profileData | async)?.kecamatan}}, {{(profileData | async)?.kabupaten}}</ion-col>
+        </ion-row>
+      </ion-item>
+      <ion-item class="tabel" text-wrap>
+        <ion-row>
+          <ion-col col-4 class="header-tabel"><ion-icon color="primary" item-start name='timer'></ion-icon>Jam Buka</ion-col>
+          <ion-col col-8 class="isi-tabel">{{(profileData | async)?.jamBuka }} s/d {{(profileData | async)?.jamTutup }} WIB</ion-col>
+        </ion-row>
+      </ion-item>
+      <ion-item class="tabel" text-wrap>
+        <ion-row>
+          <ion-col col-4 class="header-tabel"><ion-icon color="primary" item-start name='bulb'></ion-icon>Hari Buka</ion-col>
+          <ion-col col-8 class="isi-tabel">{{(profileData | async)?.hariBuka }}</ion-col>
+        </ion-row>
+      </ion-item>
+      <ion-item class="tabel" text-wrap>
+        <ion-row>
+          <ion-col col-4 class="header-tabel"><ion-icon color="primary" item-start name='logo-whatsapp'></ion-icon>No.HP</ion-col>
+          
+            <input  #myControl [value]="(profileData | async)?.hp" type="hidden" />
+            <ion-col col-8 class="isi-tabel" (click)="copyHp(myControl.value)" style="color: #C70039">{{(profileData | async)?.hp }}</ion-col>
+        </ion-row>
+      </ion-item>
+    </div>
+    <ion-list>
+    <div id="posts">
+  <accordion-list 
+                  
+                  [title]="headerMakanan"
+                  textColor="#FFF"
+                  hasMargin="false"
+                  headerColor="#C70039">
+    <ion-card *ngFor="let item of makanan$" class="dagangan">
+        <img src="{{ item.dagang.fotoDagangan }}" (click)="lihatDetail(item)" class="gambar" (load)="loaded = true" [hidden]="!loaded" [ngClass]="{'img-loaded':loaded}">
+        <ion-spinner [ngClass]="{'center':true}" *ngIf="!loaded"></ion-spinner>
+        <ion-item (click)="lihatDetail(item)">
+          <div class="namaDagangan" text-wrap>{{item.dagang.namaDagangan}}</div>
+        </ion-item>
+        <ion-row>
+          <ion-col col-5 no-padding text-wrap><ion-item class="itemHarga">
+          <div class="harga">Rp{{item.dagang.harga}}</div>
+        </ion-item></ion-col>
+          <ion-col col-7 no-padding text-wrap><ion-item class="itemHarga" style="padding-left: 0px;">
+          <div class="ongkir">Ongkir (Rp): {{ format(item.ongkir.min) }}-{{ format(item.ongkir.max) }}</div>
+        </ion-item></ion-col>
+        </ion-row>
+        
+        <ion-row no-padding style="margin-top: -10px;">
+          <ion-col col-7 no-padding>
+            <ion-item class="rates">
+            <rating [(ngModel)]="item.ulasan.rate" readOnly="true" max="5" emptyStarIconName="star-outline" halfStarIconName="star-half" starIconName="star" nullable="false">
+            </rating>
+            <div item-right class="angkaRatings">{{item.ulasan.rate}} ({{item.ulasan.jumlah}})</div>
+          </ion-item>
+          </ion-col>
+          <ion-col col-5 no-padding *ngIf="!item.disukai.suka">
+            <ion-item class="suka" no-padding >
+            <button ion-button outline icon-left color="primary-dark" (click)="like(item)">
+                <ion-icon name='heart'></ion-icon>
+                Suka {{item.jumlahLike}}
+              </button>
+          </ion-item>
+          </ion-col>
+          <ion-col col-5 no-padding  *ngIf="item.disukai.suka">
+            <ion-item class="suka" no-padding >
+            <button ion-button outline icon-left color="primary-light" (click)="like(item)">
+                <ion-icon name='heart'></ion-icon>
+                Disukai {{item.jumlahLike}}
+              </button>
+          </ion-item>
+          </ion-col>
+        </ion-row>
+      </ion-card>
+  </accordion-list>
+  <accordion-list [title]="headerBarang" textColor="#FFF"
+                  hasMargin="false"
+                  headerColor="#C70039">
+    <ion-card *ngFor="let item of barang$" class="dagangan">
+        <img src="{{ item.dagang.fotoDagangan }}" (click)="lihatDetail(item)" class="gambar" (load)="loaded = true" [hidden]="!loaded" [ngClass]="{'img-loaded':loaded}">
+        <ion-spinner [ngClass]="{'center':true}" *ngIf="!loaded"></ion-spinner>
+        <ion-item (click)="lihatDetail(item)">
+          <div class="namaDagangan" text-wrap>{{item.dagang.namaDagangan}}</div>
+        </ion-item>
+        <ion-row>
+          <ion-col col-5 no-padding text-wrap><ion-item class="itemHarga">
+          <div class="harga">Rp{{item.dagang.harga}}</div>
+        </ion-item></ion-col>
+          <ion-col col-7 no-padding text-wrap><ion-item class="itemHarga" style="padding-left: 0px;">
+          <div class="ongkir">Ongkir (Rp): {{ format(item.ongkir.min) }}-{{ format(item.ongkir.max) }}</div>
+        </ion-item></ion-col>
+        </ion-row>
+        
+        <ion-row no-padding style="margin-top: -10px;">
+          <ion-col col-7 no-padding>
+            <ion-item class="rates">
+            <rating [(ngModel)]="item.ulasan.rate" readOnly="true" max="5" emptyStarIconName="star-outline" halfStarIconName="star-half" starIconName="star" nullable="false">
+            </rating>
+            <div item-right class="angkaRatings">{{item.ulasan.rate}} ({{item.ulasan.jumlah}})</div>
+          </ion-item>
+          </ion-col>
+          <ion-col col-5 no-padding *ngIf="!item.disukai.suka">
+            <ion-item class="suka" no-padding >
+            <button ion-button outline icon-left color="primary-dark" (click)="like(item)">
+                <ion-icon name='heart'></ion-icon>
+                Suka {{item.jumlahLike}}
+              </button>
+          </ion-item>
+          </ion-col>
+          <ion-col col-5 no-padding  *ngIf="item.disukai.suka">
+            <ion-item class="suka" no-padding >
+            <button ion-button outline icon-left color="primary-light" (click)="like(item)">
+                <ion-icon name='heart'></ion-icon>
+                Disukai {{item.jumlahLike}}
+              </button>
+          </ion-item>
+          </ion-col>
+        </ion-row>
+      </ion-card>
+  </accordion-list>
+
+  <accordion-list [title]="headerJasa" textColor="#FFF"
+                  hasMargin="false"
+                  headerColor="#C70039">
+    <ion-card *ngFor="let item of jasa$" class="dagangan">
+        <img src="{{ item.dagang.fotoDagangan }}" (click)="lihatDetail(item)" class="gambar" (load)="loaded = true" [hidden]="!loaded" [ngClass]="{'img-loaded':loaded}">
+        <ion-spinner [ngClass]="{'center':true}" *ngIf="!loaded"></ion-spinner>
+        <ion-item (click)="lihatDetail(item)">
+          <div class="namaDagangan" text-wrap>{{item.dagang.namaDagangan}}</div>
+        </ion-item>
+        <ion-row>
+          <ion-col col-5 no-padding text-wrap><ion-item class="itemHarga">
+          <div class="harga">Rp{{item.dagang.harga}}</div>
+        </ion-item></ion-col>
+          <ion-col col-7 no-padding text-wrap><ion-item class="itemHarga" style="padding-left: 0px;">
+          <div class="ongkir">Ongkir (Rp): {{ format(item.ongkir.min) }}-{{ format(item.ongkir.max) }}</div>
+        </ion-item></ion-col>
+        </ion-row>
+        
+        <ion-row no-padding style="margin-top: -10px;">
+          <ion-col col-7 no-padding>
+            <ion-item class="rates">
+            <rating [(ngModel)]="item.ulasan.rate" readOnly="true" max="5" emptyStarIconName="star-outline" halfStarIconName="star-half" starIconName="star" nullable="false">
+            </rating>
+            <div item-right class="angkaRatings">{{item.ulasan.rate}} ({{item.ulasan.jumlah}})</div>
+          </ion-item>
+          </ion-col>
+          <ion-col col-5 no-padding *ngIf="!item.disukai.suka">
+            <ion-item class="suka" no-padding >
+            <button ion-button outline icon-left color="primary-dark" (click)="like(item)">
+                <ion-icon name='heart'></ion-icon>
+                Suka {{item.jumlahLike}}
+              </button>
+          </ion-item>
+          </ion-col>
+          <ion-col col-5 no-padding  *ngIf="item.disukai.suka">
+            <ion-item class="suka" no-padding >
+            <button ion-button outline icon-left color="primary-light" (click)="like(item)">
+                <ion-icon name='heart'></ion-icon>
+                Disukai {{item.jumlahLike}}
+              </button>
+          </ion-item>
+          </ion-col>
+        </ion-row>
+      </ion-card>
+  </accordion-list>
+    </div>
+  </ion-list>
+
+    </div>    
+  </div>
+</ion-content>

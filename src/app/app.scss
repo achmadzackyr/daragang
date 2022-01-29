@@ -1,0 +1,90 @@
+.round {
+  border-radius: 50%;
+}
+
+.transparent-header {
+  // This is just to make the header transparent and button/icon with white color
+  .toolbar-content,
+  .back-button {
+    color: white;
+  }
+  .toolbar-background,
+  ion-navbar,
+  ion-header {
+    background: transparent !important;
+    background-color: transparent !important;
+  }
+  .header-md::after,
+  .toolbar-background-ios {
+    background-image: none;
+    border-bottom: 0;
+  }
+  .header-ios .toolbar-background-ios,
+  .footer-ios .toolbar-background-ios {
+    border: 0;
+  }
+  // ---
+}
+
+// Off Design Sidemenu
+#menu-off {
+  .menu-header {
+    padding: 5px 15px;
+    background-image: url('../assets/imgs/background/material-design-background.jpg');
+    background-size: cover;
+    color: white;
+    background-repeat: no-repeat;
+    background-position: center;
+    .name {
+      font-weight: 500;
+      margin-bottom: 3px;
+    }
+    .e-mail {
+      margin-top: 0;
+      margin-bottom: 5px;
+    }
+  }
+
+  .user-avatar {
+    padding: .5em;
+    height: 12vh;
+  }
+  h3,
+  .label,
+  {
+    color: #999;
+    font-weight: 400;
+  }
+}
+
+// Material Design Sidemenu
+#menu-material {
+  .menu-header {
+    padding: 5px 15px;
+    background-size: cover;
+    color: white;
+    background-repeat: no-repeat;
+    background-position: center;
+    .name {
+      font-weight: 500;
+      margin-bottom: 3px;
+      text-shadow: 1px 1px 1px #444;
+    }
+    .e-mail {
+      margin-top: 0;
+      margin-bottom: 5px;
+      text-shadow: 1px 1px 1px #444;
+    }
+  }
+
+  .user-avatar {
+    padding: .5em;
+    height: 12vh;
+  }
+  h3,
+  .label,
+  {
+    color: #999;
+    font-weight: 400;
+  }
+}

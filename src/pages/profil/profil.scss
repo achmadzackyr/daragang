@@ -1,0 +1,319 @@
+page-profil {
+  .tabelMap {
+  width: 100%;
+  padding-left: 0px;
+  border-bottom: 1px solid #ccc;
+
+  .item-inner {
+    padding-right: 0px !important;
+
+    ion-label {
+      margin: 0px !important;
+    }
+  }
+}
+  
+  .navButton {
+    text-shadow: 1px 1px 3px #555;
+    //color: white;
+  }
+
+  .back-button {
+      text-shadow: 1px 1px 3px #555;
+    }
+
+  ion-content {
+    background-color: #f9f9f9 !important;
+  }
+  button,
+  ion-button,
+  .button-md,
+  .button-ios {
+    text-transform: none !important;
+  }
+  p {
+    color: #444;
+  }
+  // Cover image
+  #profile-bg {
+  position: absolute;
+  left: 0;
+  width: 100% !important;
+  margin-top: -16px;
+  height: 160px !important;
+  background-size: cover !important;
+  background-repeat: no-repeat !important;
+  background-position: center;
+  text-align: center;
+  }
+  // Profile content
+  #content {
+    position: relative;
+    margin-top: 150px;
+    //padding-top: 550px;
+    text-align: center;
+  }
+  #profile-image {
+    display: block;
+    border-radius: 50%;
+    width: auto;
+    height: 100px;
+    margin: 0 auto 0;
+    box-shadow: 0px 11px 20px -3px rgba(142, 136, 146, 0.75);
+  }
+  #profile-info {
+    position: absolute;
+    top: -95px;
+    width: 100%;
+    z-index: 2;
+    text-align: center;
+  }
+  #profile-name {
+    color: #444;
+    font-size: 26px;
+  }
+  .profile-description {
+    font-size: 15px;
+    color: #888;
+  }
+  .follow-button {
+    text-transform: none;
+    border-radius: 3px !important;
+    ion-icon {
+      font-weight: bold;
+      padding-left: 5px;
+      font-size: 2.5rem;
+    }
+  }
+  // Following, Followers and all..
+  .profile-numbers {
+    p {
+      color: #444;
+      font-size: small;
+      margin-bottom: 3px;
+      margin-top: 0px;
+    }
+    span {
+      font-weight: bold;
+      font-size: 2rem;
+      color: #34354c;
+    }
+  }
+
+  // Posts feed
+  #posts {
+    text-align: justify;
+    margin-top: 17px;
+  }
+
+  .konten {
+  padding: 5px 16px;
+  }
+
+  .card-content p {
+    font-size: 0.7em !important;
+  }
+
+  .gambar {
+    height: 160px;
+    object-fit: cover;
+  }
+
+  .garis {
+
+  border-top: 1px solid #ccc;
+
+  }
+
+  h6 {
+  text-align: center !important;
+  background-color: map-get($colors, primary);
+  color: #fff;
+  padding: 5px;
+  }
+
+
+  .tabel {
+  width: 100%;
+  padding-left: 0px;
+  ion-label {
+    margin:0px;
+  }
+  }
+
+  .header-tabel {
+  padding-left: 10px;
+  font-size: 1rem;
+  color: grey;
+
+  ion-icon {
+    margin-left: 0px !important;
+    margin-top: 0px !important;
+    margin-bottom: 0px !important;
+  }
+  }
+
+  .isi-tabel {
+    margin-top:0px;
+    font-size: 1rem;
+    text-align: right;
+    font-weight: bold;
+    color: grey;
+    padding-right: 8px;
+  }
+
+  .bio {
+    border: 1px solid #ccc;
+    margin-top: 10px;
+    border-radius: 2px;
+    box-shadow: 1px 3px 5px #ccc;
+  }
+
+  .dagangan {
+  margin: 10px 0px; 
+  width: 100%;
+  }
+
+   hr {
+    border: 0;
+    height: 1px;
+    background: #444;
+    background: -webkit-linear-gradient(left, hsla(0, 0%, 0%, 0) 0%, rgb(188, 198, 214) 50%, hsla(0, 0%, 0%, 0) 100%);
+    margin-top: -17px;
+    margin-bottom: 17px;
+  }
+
+  .isi-deskripsi {
+  font-size: 1rem;
+  color: grey;
+  }
+
+  .header-deskripsi {
+    font-size: 1rem;
+    font-weight: bold;
+    color: grey;
+  }
+
+  .img-loaded + ion-spinner {
+  display:none;
+}
+
+.center{
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+}
+
+
+ul {
+  padding: 0px;
+
+  &.rating li {
+    padding: 0px !important;
+    background: none;
+    color: map-get($colors, secondary);
+
+    ion-icon {
+      font-size: 18px;
+      transform: rotate(0deg);
+    }
+  }
+}
+
+.suka {
+    max-height: 3rem !important;
+    margin-top: -15px;
+    float:right;
+      ion-label {
+        margin-top: 3px;
+        margin-right: 0px;
+      }
+
+      button {
+        float: right;
+        margin-right: 8px;
+      }
+
+      ion-icon {
+        transform: rotate(0deg);
+      }
+}
+
+.rates {
+    max-height: 3rem !important;
+    margin-top: -15px;
+      ion-label {
+        margin-top: 3px;
+      }
+      .input-wrapper {
+        max-width: 66%;
+      }
+
+      .item-inner {
+        padding-right: 0px !important;
+      }
+}
+
+.namaDagangan {
+  margin: 0 0 2px;
+font-size: 1.6rem;
+font-weight: normal;
+}
+
+.angkaRating {
+  font-size: 12px;
+margin-top: 0px !important;
+color: grey;
+}
+
+.angkaRatings {
+  font-size: 12px;
+margin-top: 0px !important;
+color: grey;
+margin-left: 0px !important;
+}
+
+.harga {
+    padding: 0px;
+    margin: 0 0 2px;
+    font-size: 1.6rem;
+    font-weight: bold;
+    color: black;
+  }
+
+  .ongkir {
+    margin: 0 0 2px;
+    font-size: 1.2rem;
+    font-weight: normal;
+    color: grey;
+    text-align: right;
+  }
+
+  .itemHarga {
+  margin-bottom: 6px;
+  margin-top: -15px;
+      .item-inner {
+      padding-right: 0px !important;
+    }
+  }
+
+  .header-wilayah {
+    font-size: 1rem;
+    font-weight: bold;
+    color: grey;
+    text-align: left;
+    margin: 5px 0px 5px 16px;
+  }
+
+.header-tabel-wilayah {
+  font-size: 1rem;
+  color: grey;
+  padding-left: 16px;
+  text-transform: capitalize;
+}
+
+.cod {
+  padding-left:0px;
+}
+
+}

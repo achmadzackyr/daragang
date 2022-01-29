@@ -1,0 +1,55 @@
+page-home {
+  .scroll-content{
+    overflow-y: auto !important;
+  }
+  h2 {
+    color: white;
+    text-shadow: 2px 2px 6px #555;
+    padding: 0px 10px;
+  }
+  ion-slides,
+  .swiper-container {
+    height: 45vh;
+    width: auto;
+  }
+  .swiper-slide {
+    background-size: cover !important;
+    background-position: center !important;
+  }
+  .swiper-pagination-bullet {
+    background-color: white;
+  }
+
+  .menuUtama {
+    //height: 35vh;
+    margin-top: 10px;
+
+     ion-row {
+      height: 16vh;
+      display: flex !important;
+        justify-content: center !important;
+        align-items: center !important;
+        
+    }
+
+    
+      
+      ion-col {
+        text-align: center;
+        //font-size: large;
+        //border: 1px #e7e7e7 solid;
+        //padding: 22px;
+        color: grey;
+      }
+
+        ion-icon {
+          font-size: 4rem;
+          color: map-get($colors, primary);
+        }
+      
+    
+
+  }
+ 
+}
+

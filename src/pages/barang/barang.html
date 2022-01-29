@@ -1,0 +1,149 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon><ion-badge color="secondary" *ngIf="jumlah.like!=0||jumlah.komentar!=0||jumlah.ulasan!=0">{{jumlah.like+jumlah.komentar+jumlah.ulasan}}</ion-badge>
+    </button>
+    <ion-searchbar (keyup.enter)="getItems($event)" placeholder="Cari Barang"></ion-searchbar>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content>
+  <ion-refresher (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content pullingIcon="arrow-dropdown"
+      pullingText="Tarik untuk Memuat Ulang"
+      refreshingSpinner="circles"
+      refreshingText="Memuat Ulang..."></ion-refresher-content>
+  </ion-refresher>
+  <ion-fab right bottom *ngIf="pilih">
+    <button ion-fab color="secondary" style="box-shadow: 1px 3px 6px #555;" (click)="presentPopover($event)">
+      <ion-icon name="funnel"></ion-icon>
+    </button>
+  </ion-fab>
+  <ion-list>
+  <div style="background-color: #e7e7e7">
+        <ion-grid text-center>
+            <ion-row class="thumb">
+              <ion-col (click)="kategori(null)" class="semua">
+                <div>Semua Jenis Barang</div>
+              </ion-col>
+              <ion-col (click)="kategori('Perawatan & Kecantikan')" class="kecantikan">
+                <div>Perawatan & Kecantikan</div>
+              </ion-col>
+              <ion-col (click)="kategori('Kesehatan')" class="kesehatan">
+                <div>Kesehatan</div>
+              </ion-col>
+            </ion-row>
+
+            <ion-row class="thumb">
+              <ion-col (click)="kategori('Fashion Pria')" class="fashionpria">
+                <div>Fashion Pria</div>
+              </ion-col>
+              <ion-col (click)="kategori('Fashion Wanita')" class="fashionwanita">
+                <div>Fashion Wanita</div>
+              </ion-col>
+              <ion-col (click)="kategori('Fashion Anak')" class="fashionanak">
+                <div>Fashion Anak</div>
+              </ion-col>
+            </ion-row>
+
+            <ion-row class="thumb">
+              <ion-col (click)="kategori('Perlengkapan Bayi')" class="bayi">
+                <div>Perlengkapan Bayi</div>
+              </ion-col>
+              <ion-col (click)="kategori('Perabot Rumah Tangga')" class="perabot">
+                <div>Perabot Rumah Tangga</div>
+              </ion-col>
+              <ion-col (click)="kategori('Elektronik')" class="elektronik">
+                <div>Elektronik</div>
+              </ion-col>
+            </ion-row>
+
+            <ion-row class="thumb">
+              <ion-col (click)="kategori('Handphone & Aksesorisnya')" class="hp">
+                <div>Handphone & Aksesorisnya</div>
+              </ion-col>
+              <ion-col (click)="kategori('Komputer & Aksesorisnya')" class="komputer">
+                <div>Komputer & Aksesorisnya</div>
+              </ion-col>
+              <ion-col (click)="kategori('Laptop & Aksesorisnya')" class="laptop">
+                <div>Laptop & Aksesorisnya</div>
+              </ion-col>
+            </ion-row>
+
+            <ion-row class="thumb">
+              <ion-col (click)="kategori('Olahraga')" class="olahraga">
+                <div>Olahraga</div>
+              </ion-col>
+              <ion-col (click)="kategori('Hobi & Koleksi')" class="hobi">
+                <div>Hobi & Koleksi</div>
+              </ion-col>
+              <ion-col (click)="kategori('Souvenir & Kado')" class="kado">
+                <div>Souvenir & Kado</div>
+              </ion-col>
+            </ion-row>
+
+            <ion-row class="thumb">
+              <ion-col (click)="kategori('Otomotif')" class="otomotif">
+                <div>Otomotif</div>
+              </ion-col>
+              <ion-col (click)="kategori('Alat Tulis Kantor')" class="atk">
+                <div>Alat Tulis Kantor</div>
+              </ion-col>
+              <ion-col (click)="kategori('Barang Lainnya')" class="baranglainnya">
+                <div>Barang Lainnya</div>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+          <hr />
+          <h6 *ngIf="!pilih">Pilih Kategori Barang</h6>
+          <h6 *ngIf="pilih">{{ this.kat }} ({{ barang$?.length }})</h6>
+          <!-- <h5 *ngIf="barang$?.length==0" text-center>Belum Ada Dagangan</h5> -->
+          <ion-card *ngFor="let item of barang$ | slice:0:slice; let i=index">
+        <img src="{{ item.dagang.fotoDagangan }}" (click)="lihatDetail(item)" class="gambar" (load)="loaded = true" [hidden]="!loaded" [ngClass]="{'img-loaded':loaded}">
+        <ion-spinner [ngClass]="{'center':true}" *ngIf="!loaded"></ion-spinner>
+        <ion-item (click)="lihatDetail(item)">
+          <div class="namaDagangan" text-wrap>{{item.dagang.namaDagangan}}</div>
+          <p style="font-size: 0.7em !important;">{{ item.dagang.jenis }} > {{ item.dagang.kategori }}</p>
+        </ion-item>
+        <ion-row>
+          <ion-col col-5 no-padding text-wrap><ion-item class="itemHarga">
+          <div class="harga">Rp{{item.dagang.harga}}</div>
+        </ion-item></ion-col>
+          <ion-col col-7 no-padding text-wrap><ion-item class="itemHarga">
+          <div class="ongkir">Ongkir (Rp): {{ format(item.ongkir.min) }}-{{ format(item.ongkir.max) }}</div>
+        </ion-item></ion-col>
+        </ion-row>
+        
+        <ion-row no-padding style="margin-top: -10px;">
+          <ion-col col-7 no-padding>
+            <ion-item class="rates">
+            <rating [(ngModel)]="item.ulasan.rate" readOnly="true" max="5" emptyStarIconName="star-outline" halfStarIconName="star-half" starIconName="star" nullable="false" style="float: left;">
+            </rating>
+            <div item-right class="angkaRatings">{{item.ulasan.rate}}<div style="float: right;">({{item.ulasan.jumlah}})</div></div>
+          </ion-item>
+          </ion-col>
+          <ion-col col-5 no-padding *ngIf="!item.disukai.suka">
+            <ion-item class="suka" no-padding >
+            <button ion-button outline icon-left color="primary-dark" (click)="like(item)">
+                <ion-icon name='heart'></ion-icon>
+                Suka {{item.jumlahLike}}
+              </button>
+          </ion-item>
+          </ion-col>
+          <ion-col col-5 no-padding  *ngIf="item.disukai.suka">
+            <ion-item class="suka" no-padding >
+            <button ion-button outline icon-left color="primary-light" (click)="like(item)">
+                <ion-icon name='heart'></ion-icon>
+                Disukai {{item.jumlahLike}}
+              </button>
+          </ion-item>
+          </ion-col>
+        </ion-row>
+      </ion-card>
+       <ion-infinite-scroll (ionInfinite)="doInfinite($event)" *ngIf="pilih">
+         <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Mengambil data selanjutnya.."></ion-infinite-scroll-content>
+       </ion-infinite-scroll>
+    </div>
+</ion-list>
+</ion-content>
